@@ -34,13 +34,13 @@ const Landing = () => {
               </p>
               <div className="flex my-3 gap-2 place-items-center items-center justify-center ">
                 <Link to="/signup">
-                  <button className="shadow-md text-[0.8rem] px-4 py-3 flex items-center gap-2 rounded-full bg-pink hover-dark-bg-pink">
+                  <button className="shadow-md text-[0.8rem] px-4 py-3 flex items-center gap-2 border border-gray-500 rounded-full bg-yellow hover-dark-bg-yellow">
                     <PiIcon className="h-4 w-4 md:h-6 md:w-6" />
                     <p>Get Started</p>
                   </button>
                 </Link>
                 <Link to="/signup">
-                  <button className="shadow-md text-[0.8rem] px-4 py-3 flex gap-2 items-center rounded-full hover-dark-bg-blue border border-slate-600">
+                  <button className="shadow-md text-[0.8rem] px-4 py-3 flex gap-2 items-center rounded-full border border-gray-500 hover-dark-bg-yellow ">
                     <SearchIcon className="h-4 w-4 md:h-6 md:w-6" />
                     <p>Explore Features</p>
                   </button>

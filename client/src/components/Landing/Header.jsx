@@ -7,10 +7,10 @@ const Header = () => {
       <div className="flex items-center justify-between">
        <Logo />
         <div className="hidden md:flex items-center gap-6">
-          <Link className="hover:text-white">Home</Link>
-          <Link className="hover:text-white">Features</Link>
-          <Link className="hover:text-white">Pricing</Link>
-          <Link className="hover:text-white">FAQ</Link>
+          <Link className="border-b-transparent border-b-[0.15rem] hover:border-b-gray-900">Home</Link>
+          <Link className="border-b-transparent border-b-[0.15rem] hover:border-b-gray-900">Features</Link>
+          <Link className="border-b-transparent border-b-[0.15rem] hover:border-b-gray-900">Pricing</Link>
+          <Link className="border-b-transparent border-b-[0.15rem] hover:border-b-gray-900">FAQ</Link>
         </div>
         <div className="flex md:hidden">
           <MenuIcon className="h-6 w-6" />

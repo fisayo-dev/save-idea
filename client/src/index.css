@@ -13,8 +13,7 @@
 }
 
 body {
-  background-color: var(--blue-color);
-  color: var(--app-light-color);
+  background-color: var(--app-light);
 }
 
 @layer base {
@@ -95,6 +94,15 @@ body {
 .dark-bg-blue,
 .hover-dark-bg-blue:hover {
   background-color: var(--dark-blue-color);
+}
+
+.bg-yellow,
+.hover-bg-yellow {
+  background-color: var(--yellow-color);
+}
+.dark-bg-yellow,
+.hover-dark-bg-yellow:hover {
+  background-color: var(--dark-yellow-color);
 }
 
 .bg-pink,
