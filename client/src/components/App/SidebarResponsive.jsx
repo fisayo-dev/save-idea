@@ -5,7 +5,7 @@ import {
     Sigma,
     UserCircle,
   } from "lucide-react";
-  import { Logo } from ".";
+  import Logo from "../Public/Logo";
   import { NavLink } from "react-router-dom";
   import {
     Calculator,
