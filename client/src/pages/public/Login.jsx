@@ -10,7 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <FormSide>
+    <FormSide formImagePosition='left'>
       <div className="grid gap-2">
         <h2 className="text-4xl font-bold text-center">Welcome Back!</h2>
         <p className="text-center">
