@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { PiIcon, SearchIcon } from "lucide-react";
 
-import brain_svg from "../assets/brain_svg.png";
+// import brain_svg from "../assets/brain_svg.png";
 import { useEffect } from "react";
 
 const Landing = () => {
@@ -46,12 +46,12 @@ const Landing = () => {
                 </Link>
               </div>
             </div>
-            <img
+            {/* <img
               src={brain_svg}
               alt=""
               className="grid md:mr-auto md:place-items-end place-items-center mx-auto justify-end items-center w-9/12 md:w-6/12"
-            />
-          </div>
+            />*/}
+          </div> 
         </div>
       </div>
     </div>
