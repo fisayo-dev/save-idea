@@ -1,6 +1,6 @@
 import { FormSide } from "../../components";
-import { User, Key, Eye, EyeSlash } from "iconsax-react";
-import { Rocket, Users } from "lucide-react";
+import { User, Key, Eye, EyeSlash, } from "iconsax-react";
+import { MailIcon, Rocket, Users } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Google from "../../assets/vectors/Google.svg";
@@ -58,7 +58,7 @@ const Login = () => {
             <label className="font-bold text-gray-800">Email Address</label>
             <div className="border border-slate-600 rounded-full py-4 px-5 ">
               <div className="flex items-center gap-2">
-                <User className="h-6 w-6" />
+                <MailIcon className="h-6 w-6" />
                 <input
                   type="email"
                   className="w-full"
