@@ -8,7 +8,7 @@ const FormSide = ({ children }) => {
         </div>
       </div>
       <div className="h-[100vh]">
-        <div className="grid place-items-center h-full">{children}</div>
+        <div className="flex flex-col justify-center h-full p-2  gap-8">{children}</div>
       </div>
     </div>
   );
