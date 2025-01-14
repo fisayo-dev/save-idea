@@ -16,7 +16,7 @@ import {
   } from "iconsax-react";
   import { useAuth } from "../../contexts/AuthContext";
   
-  const Sidebar = () => {
+  const SidebarResponsive = () => {
     const { logout } = useAuth();
     const activeLinks = ({ isActive }) =>
       isActive
@@ -102,5 +102,5 @@ import {
     );
   };
   
-  export default Sidebar;
+  export default SidebarResponsive;
   
