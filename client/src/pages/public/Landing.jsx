@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import { PiIcon, SearchIcon } from "lucide-react";
-
 // import brain_svg from "../assets/brain_svg.png";
 import { useEffect } from "react";
+import { Header } from '../../components'
 
 const Landing = () => {
   const fetchData = async () => {
     try {
-      const res = await fetch('/api/');
+      const res = await fetch("/api/");
       const data = await res.json();
-      console.log(data)
+      console.log(data);
     } catch (err) {
       console.error(err.message);
     }
@@ -20,6 +20,7 @@ const Landing = () => {
   }, []);
   return (
     <div>
+      <Header />
       <div className="py-5">
         <div className="app-container">
           <div className="grid md:flex md:my-0 my-10 gap-5 md:justify-between items-center">
@@ -51,7 +52,7 @@ const Landing = () => {
               alt=""
               className="grid md:mr-auto md:place-items-end place-items-center mx-auto justify-end items-center w-9/12 md:w-6/12"
             />*/}
-          </div> 
+          </div>
         </div>
       </div>
     </div>
