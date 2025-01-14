@@ -8,7 +8,8 @@ import {
   Signup,
   Login,
   PageNotFound,
-  VoltPage
+  Volt,
+  Landing
 } from "./pages";
 import AppOutlet from "./outlets/AppOutlet";
 import PrivateRoutes from "./utils/PrivateRoutes";
@@ -16,15 +17,14 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/home" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="" element={<PrivateRoutes />}>
-          <Route path="/whiteboard/board" element={<Board />} />
           <Route path="" element={<AppOutlet />}>
-            <Route path="/volt" element={<VoltPage />} />
+            <Route path="/volt" element={<Volt />} />
           </Route>
         </Route>
       </>

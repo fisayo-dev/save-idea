@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Sidebar, SidebarResponsive } from "../components";
 import { Message } from "iconsax-react";
 import { BellIcon, MenuIcon, RocketIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const AppOutlet = () => {
   const [turnMenuOn, setTurnMenuOn] = useState(false);
