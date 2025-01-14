@@ -7,7 +7,7 @@ const Header = () => {
       <div className="flex items-center justify-between">
        <Logo />
         <div className="hidden md:flex items-center gap-6">
-          <Link to='/singup' className="border-b-transparent border-b-[0.15rem] hover:border-b-gray-900">Signup</Link>
+          <Link to='/signup' className="border-b-transparent border-b-[0.15rem] hover:border-b-gray-900">Signup</Link>
           <Link to="/login" className="border-b-transparent border-b-[0.15rem] hover:border-b-gray-900">Login</Link>
           
         </div>
