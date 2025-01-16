@@ -1,7 +1,7 @@
 import { FormSide } from "../../components";
 import { User, Key, Eye, EyeSlash, } from "iconsax-react";
 import { MailIcon, Rocket, Users } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Google from "../../assets/vectors/Google.svg";
 
