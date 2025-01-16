@@ -10,6 +10,7 @@ const Signup = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
@@ -45,8 +46,8 @@ const Signup = () => {
       setEmailError("");
     }
 
-    if (!password.trim() || password.length < 6) {
-      setPasswordError("Password must be at least 6 characters.");
+    if (!password.trim() || password.length < 8) {
+      setPasswordError("Password must be at least 8 characters.");
       isValid = false;
     } else {
       setPasswordError("");
@@ -80,7 +81,10 @@ const Signup = () => {
           Fill in all the required info to create an account
         </p>
       </div>
-      <form className="grid gap-6 mx-auto md:w-8/12 w-full" onSubmit={handleSignup}>
+      <form
+        className="grid gap-6 mx-auto md:w-8/12 w-full"
+        onSubmit={handleSignup}
+      >
         {!showRepeatPassword && (
           <>
             <div className="grid gap-3">
@@ -99,7 +103,9 @@ const Signup = () => {
                       />
                     </div>
                   </div>
-                  {firstNameError && <p className="text-red-500 text-sm">{firstNameError}</p>}
+                  {firstNameError && (
+                    <p className="text-red-500 text-sm">{firstNameError}</p>
+                  )}
                 </div>
                 <div className="grid gap-3">
                   <label className="font-bold text-gray-800">Last Name</label>
@@ -115,7 +121,9 @@ const Signup = () => {
                       />
                     </div>
                   </div>
-                  {lastNameError && <p className="text-red-500 text-sm">{lastNameError}</p>}
+                  {lastNameError && (
+                    <p className="text-red-500 text-sm">{lastNameError}</p>
+                  )}
                 </div>
               </div>
 
@@ -133,7 +141,9 @@ const Signup = () => {
                     />
                   </div>
                 </div>
-                {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
+                {emailError && (
+                  <p className="text-red-500 text-sm">{emailError}</p>
+                )}
               </div>
 
               <div className="grid gap-3">
@@ -156,7 +166,9 @@ const Signup = () => {
                     </div>
                   </div>
                 </div>
-                {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
+                {passwordError && (
+                  <p className="text-red-500 text-sm">{passwordError}</p>
+                )}
               </div>
             </div>
           </>
@@ -169,15 +181,23 @@ const Signup = () => {
               <div className="flex items-center gap-2">
                 <Key className="h-6 w-6" />
                 <input
-                  type="password"
+                  type={showPassword2 ? 'text': 'password'}
                   className="w-full"
                   placeholder="Re-type your password"
                   value={repeatPassword}
                   onChange={(e) => setRepeatPassword(e.target.value)}
                 />
+                <div
+                  className="cursor-pointer"
+                  onClick={() => setShowPassword2((prev) => !prev)}
+                >
+                  {!showPassword2 ? <Eye /> : <EyeSlash />}
+                </div>
               </div>
             </div>
-            {repeatPasswordError && <p className="text-red-500 text-sm">{repeatPasswordError}</p>}
+            {repeatPasswordError && (
+              <p className="text-red-500 text-sm">{repeatPasswordError}</p>
+            )}
           </div>
         )}
 
@@ -187,7 +207,9 @@ const Signup = () => {
             className="shadow-md text-[0.9rem] px-4 py-3 flex items-center justify-center gap-2 rounded-full bg-yellow hover-dark-bg-yellow"
           >
             <Rocket className="h-4 w-4 md:h-6 md:w-6" />
-            <p className="capitalize">{showRepeatPassword ? "Submit" : "Signup"}</p>
+            <p className="capitalize">
+              {showRepeatPassword ? "Submit" : "Signup"}
+            </p>
           </button>
           <button className="shadow-md text-[0.9rem] px-4 py-3 font-bold flex items-center justify-center gap-2 rounded-full bg-yellow-100 text-gray-900 hover:bg-yellow-200">
             <img src={Google} width={20} height={20} />
@@ -197,7 +219,10 @@ const Signup = () => {
         {!showRepeatPassword && (
           <div className="text-sm text-center flex gap-1 justify-center">
             <p>Already have an account?</p>
-            <Link to="/login" className="text-gray-800 font-bold hover:underline">
+            <Link
+              to="/login"
+              className="text-gray-800 font-bold hover:underline"
+            >
               Login
             </Link>
           </div>
