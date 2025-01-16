@@ -63,7 +63,7 @@ const Login = () => {
               <p className="capitalize">Login </p>
             </button>
             <button className="shadow-md text-[0.9rem]  px-4 py-3 font-bold flex items-center justify-center gap-2 rounded-full bg-yellow-100 text-gray-900 hover:bg-yellow-200">
-              <img src={Google} width={20} height={20} />
+              <img alt="Google sign-in image" src={Google} width={20} height={20} />
             </button>
           </div>
           <div className="text-sm text-center flex gap-1 justify-center">
