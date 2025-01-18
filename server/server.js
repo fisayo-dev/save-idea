@@ -3,12 +3,17 @@ import * as dotenv from 'dotenv'
 import cors from 'cors'
 dotenv.config()
 
-const PORT = process.PORT;
+const PORT = process.env.PORT;
 
 const app = express();
-
-
-app.use(cors())
+const corsOptions = {
+    origin: process.env.NODE_ENV === 'production' 
+      ? 'https://saveidea.netlify.app' 
+      : 'http://localhost:5173', // Local frontend URL (
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true, // Enable cookies (if needed)
+  };
+app.use(cors(corsOptions))
 app.route('')
 
 app.listen(PORT, () => {
