@@ -1,8 +1,9 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
-dotenv.config()
 import mongoose from 'mongoose'
+import userRoutes from './routes/userRoutes.js'
+dotenv.config()
 
 const PORT = process.env.PORT;
 const localURI = process.env.LOCAL_URI
@@ -17,7 +18,9 @@ const corsOptions = {
     credentials: true, 
   };
 app.use(cors(corsOptions))
-app.route('/api/users/', )
+
+// Server Routes
+app.route('/api/users/', userRoutes)
 
 const MONGO_URI = process.env.NODE_ENV == 'production' ? productionURI: localURI
 
