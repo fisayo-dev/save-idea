@@ -9,9 +9,9 @@ const app = express();
 const corsOptions = {
     origin: process.env.NODE_ENV === 'production' 
       ? 'https://saveidea.netlify.app' 
-      : 'http://localhost:5173', // Local frontend URL (
+      : 'http://localhost:5173', 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true, // Enable cookies (if needed)
+    credentials: true, 
   };
 app.use(cors(corsOptions))
 app.route('')
