@@ -17,7 +17,7 @@ const corsOptions = {
     credentials: true, 
   };
 app.use(cors(corsOptions))
-app.route('')
+app.route('/api/users/', )
 
 const MONGO_URI = process.env.NODE_ENV == 'production' ? productionURI: localURI
 
