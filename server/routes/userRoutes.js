@@ -7,7 +7,7 @@ const router = express.Router()
 router.post('/signup', signupUser)
 router.post('/login', loginUser)
 router.delete('/:id', deleteUser)
-router.delete('/:id', getUserDetails)
+router.get('/:id', getUserDetails)
 router.put('/:id', editUser)
 
 export default router
