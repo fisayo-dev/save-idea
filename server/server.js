@@ -2,8 +2,11 @@ import express from 'express'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
 dotenv.config()
+import mongoose from 'mongoose'
 
 const PORT = process.env.PORT;
+const localURI = process.env.LOCAL_URI
+const productionURI = process.env.PRODUCTION_URI
 
 const app = express();
 const corsOptions = {
@@ -16,6 +19,11 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.route('')
 
+const MONGO_URI = process.env.NODE_ENV == 'production' ? productionURI: localURI
+
 app.listen(PORT, () => {
-    console.log('Server successfully started')
+    mongoose.connect(MONGO_URI)
+        .then(() => console.log('MongoDB connected'))
+        .catch((err) => console.log(err))
+    console.log(`Server running on port ${PORT}`)
 })
