@@ -20,7 +20,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 // Server Routes
-app.route('/api/users/', userRoutes)
+app.use('/api/users/', userRoutes)
 
 const MONGO_URI = process.env.NODE_ENV == 'production' ? productionURI: localURI
 
