@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 dotenv.config()
 
-const SECRET_KEY = process.SECRET_KEY
+const SECRET_KEY = process.env.SECRET_KEY
 
 const signupUser = async (req, res) => {
     const { first_name, last_name, email, password } = req.body

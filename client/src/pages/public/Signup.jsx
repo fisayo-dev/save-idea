@@ -69,7 +69,7 @@ const Signup = () => {
       if (response.status === 201) {
         const response1 = response.data;
         console.log("User signed up successfully:", response1);
-      } else {
+      } else {  
         console.error("Unexpected response status:", response.status);
       }
     } catch (error) {
