@@ -8,7 +8,7 @@ import {
   Signup,
   Login,
   PageNotFound,
-  Volt,
+  Ideas,
   Landing
 } from "./pages";
 import AppOutlet from "./outlets/AppOutlet";
@@ -24,7 +24,7 @@ function App() {
         <Route path="*" element={<PageNotFound />} />
         <Route path="" element={<PrivateRoutes />}>
           <Route path="" element={<AppOutlet />}>
-            <Route path="/volt" element={<Volt />} />
+            <Route path="/ideas" element={<Ideas />} />
           </Route>
         </Route>
       </>

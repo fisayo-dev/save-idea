@@ -5,7 +5,7 @@ import Signup from "./public/Signup";
 import PageNotFound from "./public/PageNotFound";
 
 // Private Routes
-import Volt from "./private/Volt";
+import Ideas from "./private/Ideas";
 
-export { Landing, Login, Signup, Volt, PageNotFound }
+export { Landing, Login, Signup, Ideas, PageNotFound }
 
