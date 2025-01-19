@@ -1,15 +1,12 @@
 import {
-    Brain,
     LayoutDashboardIcon,
     PlusCircle,
-    PlusIcon,
     PowerIcon,
-    Sigma,
     UserCircle,
   } from "lucide-react";
   import Logo from "../Public/Logo";
   import { NavLink } from "react-router-dom";
-  import { Calculator, Computing, Convert, Note, Profile, Star1, Trash } from "iconsax-react";
+  import { Star1, Trash } from "iconsax-react";
   
   import { useAuth } from "../../contexts/AuthContext";
   
@@ -17,8 +14,8 @@ import {
     const { logout } = useAuth();
     const activeLinks = ({ isActive }) =>
       isActive
-        ? "hover:bg-gray-300 px-3 py-3  font-bold rounded-lg"
-        : "hover:bg-gray-300 px-3 py-3 text-gray-700 rounded-lg";
+        ? "hover:bg-gray-200 px-3 py-3  font-bold rounded-lg"
+        : "hover:bg-gray-200 px-3 py-3 text-gray-800 rounded-lg";
   
     const linksTabs = [
       {
@@ -54,7 +51,7 @@ import {
       },
     ];
     return (
-      <div className="hidden xl:block 2xl:w-[20vw] w-[20vw] h-[100vh] py-3 border-r-[0.1rem] border-r-slate-500 bg-gray-200 overflow-scroll">
+      <div className="hidden xl:block 2xl:w-[20vw] w-[20vw] h-[100vh] py-3 bg-yellow overflow-scroll">
         <div className="flex justify-between items-center py-6 px-4">
           <Logo />
           <div className="flex gap-2 items-center">
