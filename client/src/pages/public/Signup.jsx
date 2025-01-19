@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Google from "../../assets/vectors/Google.svg";
 import axios from "axios";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -23,6 +24,8 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState("");
   const [repeatPasswordError, setRepeatPasswordError] = useState("");
 
+  const {login} = useAuth()
+ 
   const validateInputs = () => {
     let isValid = true;
 
@@ -67,10 +70,10 @@ const Signup = () => {
       },);
       
       if (response.status === 201) {
-        const response1 = response.data;
-        console.log("User signed up successfully:", response1);
-      } else {  
-        console.error("Unexpected response status:", response.status);
+        const { token } = response.data;
+        login(token);
+      } else {
+        alert("Error:", response.message);
       }
     } catch (error) {
       console.error(
