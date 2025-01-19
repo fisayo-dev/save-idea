@@ -105,6 +105,14 @@ body {
   background-color: var(--dark-yellow-color);
 }
 
+.color-yellow,
+.hover-color-yellow {
+  color: var(--yellow-color);
+}
+.dark-color-yellow,
+.hover-dark-color-yellow:hover {
+  color: var(--dark-yellow-color);
+}
 .bg-pink,
 .hover-bg-pink:hover {
   background-color: var(--pink-color);
