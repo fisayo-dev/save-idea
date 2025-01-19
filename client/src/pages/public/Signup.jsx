@@ -1,11 +1,12 @@
 import { FormSide } from "../../components";
 import { User, Key, Eye, EyeSlash } from "iconsax-react";
 import { MailIcon, Rocket, Users } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Google from "../../assets/vectors/Google.svg";
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -24,7 +25,15 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState("");
   const [repeatPasswordError, setRepeatPasswordError] = useState("");
 
-  const {login} = useAuth()
+  const { user, login } = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (user) {
+      navigate('/home')
+    } 
+  },[user,navigate])
+
  
   const validateInputs = () => {
     let isValid = true;

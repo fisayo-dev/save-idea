@@ -1,9 +1,9 @@
 import { FormSide } from "../../components";
 import { Key, Eye, EyeSlash } from "iconsax-react";
 import { MailIcon, Rocket } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Google from "../../assets/vectors/Google.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -13,7 +13,14 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null); // State to handle errors
 
-  const { login } = useAuth();
+  const { user, login } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
