@@ -1,13 +1,15 @@
 import {
     Brain,
     LayoutDashboardIcon,
+    PlusCircle,
+    PlusIcon,
     PowerIcon,
     Sigma,
     UserCircle,
   } from "lucide-react";
   import Logo from "../Public/Logo";
   import { NavLink } from "react-router-dom";
-  import { Calculator, Computing, Convert, Note, Profile } from "iconsax-react";
+  import { Calculator, Computing, Convert, Note, Profile, Star1, Trash } from "iconsax-react";
   
   import { useAuth } from "../../contexts/AuthContext";
   
@@ -16,49 +18,35 @@ import {
     const activeLinks = ({ isActive }) =>
       isActive
         ? "hover:bg-gray-300 px-3 py-3  font-bold rounded-lg"
-        : "hover:bg-gray-300 px-3 py-3 text-gray-800 rounded-lg";
+        : "hover:bg-gray-300 px-3 py-3 text-gray-700 rounded-lg";
   
     const linksTabs = [
       {
-        text: "Dashboard",
-        link: "/dashboard",
+        text: "Volt",
+        link: "/volt",
         icon: <LayoutDashboardIcon className="h-6 w-6" />,
       },
       {
-        text: "Whiteboard",
-        link: "/whiteboard",
-        icon: <Note className="h-6 w-6" />,
+        text: "create",
+        link: "/create",
+        icon: <PlusCircle className="h-6 w-6" />,
       },
       {
-        text: "Converter",
-        link: "/converter",
-        icon: <Convert className="h-6 w-6" />,
+        text: "starred",
+        link: "/starred",
+        icon: <Star1 className="h-6 w-6" />,
       },
       {
-        text: "Calculator",
-        link: "/calculator",
-        icon: <Calculator className="h-6 w-6" />,
+        text: "bin",
+        link: "/bin",
+        icon: <Trash className="h-6 w-6" />,
       },
       {
-        text: "Abscissa AI",
-        link: "/abscissa-ai",
-        icon: <Brain className="h-6 w-6" />,
-      },
-      {
-        text: "Problem Solver",
-        link: "/problem-solver",
-        icon: <Computing className="h-6 w-6" />,
-      },
-      {
-        text: "Formulae Bank",
-        link: "/formulae-bank",
-        icon: <Sigma className="h-6 w-6" />,
-      },
-      {
-        text: "Profile",
+        text: "profile",
         link: "/profile",
-        icon: <Profile className="h-6 w-6" />,
+        icon: <UserCircle className="h-6 w-6" />,
       },
+      
       {
         text: "Logout",
         link: "/",
@@ -85,7 +73,7 @@ import {
             >
               <div className="flex items-center gap-2">
                 {link.icon}
-                <p>{link.text}</p>
+                <p className="capitalize">{link.text}</p>
               </div>
             </NavLink>
           ))}
