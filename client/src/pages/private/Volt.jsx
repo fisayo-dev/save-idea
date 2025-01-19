@@ -1,7 +1,8 @@
 const Volt = () => {
   return (
-    <div>Volt</div>
-  )
-}
+    <div>
+    </div>
+  );
+};
 
-export default Volt
+export default Volt;

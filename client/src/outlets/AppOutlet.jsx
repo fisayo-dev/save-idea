@@ -9,7 +9,7 @@ const AppOutlet = () => {
   return (
     <div className={`relative w-[100vw] block md:flex `}>
       <div
-        className={`bg-black md:hidden bg-opacity-60 z-30 absolute h-[100vh] w-[100vw] ${
+        className={`bg-gray-200 md:hidden bg-opacity-60 z-30 absolute h-[100vh] w-[100vw] ${
           turnMenuOn ? "block" : "hidden"
         }`}
         onClick={() => setTurnMenuOn(false)}

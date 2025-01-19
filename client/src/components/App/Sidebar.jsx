@@ -15,8 +15,8 @@ import {
     const { logout } = useAuth();
     const activeLinks = ({ isActive }) =>
       isActive
-        ? "hover:bg-slate-900 px-3 py-3 color-pink font-bold rounded-lg"
-        : "hover:bg-slate-900 px-3 py-3 text-slate-400 hover-color-pink rounded-lg";
+        ? "hover:bg-gray-300 px-3 py-3  font-bold rounded-lg"
+        : "hover:bg-gray-300 px-3 py-3 text-gray-800 rounded-lg";
   
     const linksTabs = [
       {
@@ -66,7 +66,7 @@ import {
       },
     ];
     return (
-      <div className="hidden xl:block 2xl:w-[20vw] w-[20vw] h-[100vh] py-3 border-r-[0.1rem] border-r-slate-500 dark-bg-blue overflow-scroll">
+      <div className="hidden xl:block 2xl:w-[20vw] w-[20vw] h-[100vh] py-3 border-r-[0.1rem] border-r-slate-500 bg-gray-200 overflow-scroll">
         <div className="flex justify-between items-center py-6 px-4">
           <Logo />
           <div className="flex gap-2 items-center">
