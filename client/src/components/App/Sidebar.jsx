@@ -1,5 +1,8 @@
 import {
+  Box,
     LayoutDashboardIcon,
+    Lightbulb,
+    PiggyBankIcon,
     PlusCircle,
     PowerIcon,
     UserCircle,
@@ -19,9 +22,9 @@ import {
   
     const linksTabs = [
       {
-        text: "Volt",
-        link: "/volt",
-        icon: <LayoutDashboardIcon className="h-6 w-6" />,
+        text: "Ideas",
+        link: "/ideas",
+        icon: <Lightbulb className="h-6 w-6" />,
       },
       {
         text: "create",
