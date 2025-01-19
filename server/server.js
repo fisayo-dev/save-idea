@@ -16,8 +16,13 @@ const corsOptions = {
       : 'http://localhost:5173', 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true, 
-  };
+};
+  
+// Cors Options
 app.use(cors(corsOptions))
+
+// Json Middleware
+app.use(express.json())
 
 // Server Routes
 app.use('/api/users/', userRoutes)

@@ -4,6 +4,7 @@ import { MailIcon, Rocket, Users } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Google from "../../assets/vectors/Google.svg";
+import axios from "axios";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -56,6 +57,31 @@ const Signup = () => {
     return isValid;
   };
 
+  const submitUserForm = async () => {
+    try {
+      const response = await axios.post("/api/users/signup", {
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          password,
+      },);
+      
+      if (response.status === 201) {
+        const response1 = response.data;
+        console.log("User signed up successfully:", response1);
+      } else {
+        console.error("Unexpected response status:", response.status);
+      }
+    } catch (error) {
+      console.error(
+        "Error occurred during signup:",
+        error.response?.data || error.message
+      );
+      // Optionally set an error message state to inform the user
+    }
+  };
+  
+
   const handleSignup = (e) => {
     e.preventDefault();
 
@@ -64,6 +90,8 @@ const Signup = () => {
         setRepeatPasswordError("Passwords do not match.");
       } else {
         setRepeatPasswordError("");
+
+        submitUserForm();
         alert("Account created successfully!");
       }
     } else {
@@ -181,7 +209,7 @@ const Signup = () => {
               <div className="flex items-center gap-2">
                 <Key className="h-6 w-6" />
                 <input
-                  type={showPassword2 ? 'text': 'password'}
+                  type={showPassword2 ? "text" : "password"}
                   className="w-full"
                   placeholder="Re-type your password"
                   value={repeatPassword}
