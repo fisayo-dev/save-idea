@@ -4,6 +4,8 @@ import { MailIcon, Rocket } from "lucide-react";
 import { useState } from "react";
 import Google from "../../assets/vectors/Google.svg";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,7 +13,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null); // State to handle errors
 
-  const handleSubmit = (e) => {
+  const { login } = useAuth();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Reset previous errors
@@ -23,36 +27,39 @@ const Login = () => {
       return;
     }
 
-    // Mock login request (replace with your API call)
-    fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Invalid credentials or server error.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Login successful:", data);
-        // Handle successful login (e.g., redirect or set user state)
-      })
-      .catch((err) => {
-        setError(err.message || "An unexpected error occurred.");
+    // When there are no errors, login in user
+    try {
+      const response = await axios.post("/api/users/login", {
+        email,
+        password,
       });
+
+      if (response.status === 200) {
+        const { token } = response.data;
+        login(token);
+      } else {
+        alert("Error:", response.message);
+      }
+    } catch (error) {
+      console.error(
+        "Error occurred during signup:",
+        error.response?.data || error.message
+      );
+    }
   };
 
   return (
     <FormSide formImagePosition="left">
       <div className="grid gap-2">
         <h2 className="text-4xl font-bold text-center">Welcome Back!</h2>
-        <p className="text-center">Login to your account with your credentials</p>
+        <p className="text-center">
+          Login to your account with your credentials
+        </p>
       </div>
-      <form className="grid gap-6 mx-auto md:w-8/12 w-full" onSubmit={handleSubmit}>
+      <form
+        className="grid gap-6 mx-auto md:w-8/12 w-full"
+        onSubmit={handleSubmit}
+      >
         <div className="grid gap-3">
           <div className="grid gap-3">
             <label className="font-bold text-gray-800">Email Address</label>
@@ -95,9 +102,7 @@ const Login = () => {
 
         {/* Display error message */}
         {error && (
-          <div className="text-red-600 text-sm text-center">
-            {error}
-          </div>
+          <div className="text-red-600 text-sm text-center">{error}</div>
         )}
 
         <div className="flex justify-center gap-3">
@@ -112,12 +117,20 @@ const Login = () => {
             type="button"
             className="shadow-md text-[0.9rem] px-4 py-3 font-bold flex items-center justify-center gap-2 rounded-full bg-yellow-100 text-gray-900 hover:bg-yellow-200"
           >
-            <img alt="Google sign-in image" src={Google} width={20} height={20} />
+            <img
+              alt="Google sign-in image"
+              src={Google}
+              width={20}
+              height={20}
+            />
           </button>
         </div>
         <div className="text-sm text-center flex gap-1 justify-center">
           <p>Are you new here?</p>
-          <Link to="/signup" className="text-gray-800 font-bold hover:underline">
+          <Link
+            to="/signup"
+            className="text-gray-800 font-bold hover:underline"
+          >
             Signup
           </Link>
         </div>
