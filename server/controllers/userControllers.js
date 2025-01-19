@@ -46,8 +46,23 @@ const signupUser = async (req, res) => {
     }
 }
 const loginUser = async (req, res) => {
-    
-}
+    const { email, password } = req.body;
+
+    try {
+        const actualUser = await User.findOne({ email }).select("+password");
+        if (!actualUser) return res.status(400).json({ message: "Sorry, but you don't seem to have an account" });
+
+        const isPasswordValid = await bcrypt.compare(password, actualUser.password);
+        if (!isPasswordValid) return res.status(401).json({ message: "Incorrect password" });
+
+        const token = jwt.sign({ id: actualUser._id }, SECRET_KEY, { expiresIn: "48h" });
+        res.status(200).json({ token });
+    } catch (err) {
+        console.error("Error logging in:", err.message);
+        res.status(500).json({ message: "Error logging in", error: err.message });
+    }
+};
+
 const getUserDetails = async (req, res) => {
     
 }
