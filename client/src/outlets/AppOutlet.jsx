@@ -28,7 +28,7 @@ const AppOutlet = () => {
             <div className="flex justify-between">
               <div className="flex gap-2 items-center">
                 <div
-                  className="block xl:hidden p-2 hover:bg-slate-700 rounded-full cursor-pointer"
+                  className="block xl:hidden p-2 hover:bg-gray-200 rounded-full cursor-pointer"
                   onClick={() => setTurnMenuOn(true)}
                 >
                   <MenuIcon className="h-7 w-7" />
