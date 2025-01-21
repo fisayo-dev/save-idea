@@ -9,7 +9,7 @@ const FormSide = ({ children, formImagePosition }) => {
           </div>
         </div>
       )}
-      <div className="h-[100vh] max-w-50 mx-auto px-10">
+      <div className="h-[100vh] md:w-full max-w-50 mx-auto px-10">
         <div className="flex flex-col justify-center h-full p-2  gap-8">
           {children}
         </div>
