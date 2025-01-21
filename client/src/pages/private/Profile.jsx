@@ -1,6 +1,30 @@
 import { Edit } from "lucide-react";
+import axios from "axios";
+import { useAuth } from "../../contexts/AuthContext";
+import { useEffect, useState } from "react";
 
 const Profile = () => {
+  const { user } = useAuth();
+  // Fetching user detrails states
+  const [userDetailsLoading, setUserDetailsLoading] = useState(null);
+
+  const getUserDetails = async () => {
+    const url =
+      process.env.NODE_ENV == "production"
+        ? "https://saveidea.netlify.app"
+        : "";
+    try {
+      const response = await axios.get(`${url}/api/users/${user}`);
+      const data = response.data;
+      console.log(data);
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    getUserDetails();
+  }, []);
   return (
     <div className="app-container">
       <div className="my-10">
