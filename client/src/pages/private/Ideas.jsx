@@ -1,5 +1,5 @@
 import { SearchNormal } from "iconsax-react";
-import { LayoutGrid, LayoutList, LucideTarget, Target } from "lucide-react";
+import { LayoutGrid, LayoutList, LucideTarget } from "lucide-react";
 
 const Ideas = () => {
   const ideas = [
