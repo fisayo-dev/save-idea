@@ -66,8 +66,8 @@ const Ideas = () => {
           <div className="my-2">
             <div className="grid  2xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 md:gap-6 gap-8 items-start">
               {ideas.map((idea, index) => (
-                <div key={index} className="grid  gap-2">
-                  <div className="h-[150px] w-full  rounded-xl bg-gray-200"></div>
+                <div key={index} className="grid gap-2">
+                  <div className="h-[150px] w-full cursor-pointer rounded-xl hover:bg-gray-300 bg-gray-200"></div>
                   <div>
                     <h2 className="font-bold text-xl">{idea.title}</h2>
                     <p className="">
