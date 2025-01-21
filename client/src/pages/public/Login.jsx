@@ -1,6 +1,6 @@
 import { FormSide } from "../../components";
 import { Key, Eye, EyeSlash } from "iconsax-react";
-import { MailIcon, Rocket } from "lucide-react";
+import { Loader2Icon, MailIcon, Rocket } from "lucide-react";
 import { useEffect, useState } from "react";
 import Google from "../../assets/vectors/Google.svg";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,7 +11,8 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null); // State to handle errors
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { user, login } = useAuth();
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const Login = () => {
   }, [user, navigate]);
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     // Reset previous errors
@@ -53,6 +55,7 @@ const Login = () => {
         error.response?.data || error.message
       );
     }
+    setLoading(false);
   };
 
   return (
@@ -115,10 +118,15 @@ const Login = () => {
         <div className="flex justify-center gap-3">
           <button
             type="submit"
-            className="shadow-md text-[0.9rem] px-4 py-3 flex items-center justify-center gap-2 rounded-full bg-yellow hover-dark-bg-yellow"
+            disabled={loading}
+            className="shadow-md disabled:cursor-not-allowed disabled:bg-yellow-300 disabled:text-gray-800 text-[0.9rem] px-4 py-3 flex items-center justify-center gap-2 rounded-full bg-yellow hover-dark-bg-yellow"
           >
-            <Rocket className="h-4 w-4 md:h-6 md:w-6" />
-            <p className="capitalize">Login</p>
+            {loading ? (
+              <Loader2Icon className="animate-spin h-6 w-6" />
+            ) : (
+              <Rocket className="h-4 w-4 md:h-6 md:w-6" />
+            )}
+            <p className="capitalize">{loading ? "Logging in" : "Login"}</p>
           </button>
           <button
             type="button"
