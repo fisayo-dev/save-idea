@@ -10,15 +10,15 @@ const SidebarResponsive = () => {
   return (
     <div
       className="z-50 block xl:hidden w-[70vw]
-           h-[100vh] py-3 bg-gray-100 overflow-scroll"
+           h-[100vh] py-4 bg-white overflow-scroll"
     >
-      <div className="flex justify-between items-center py-6 px-4">
+      <div className="flex justify-between items-center p-6">
         <Logo />
         <div className="flex gap-2 items-center">
           <UserCircle className="h-6 w-6" />
         </div>
       </div>
-      <div className="grid gap-3 border-t-[0.09rem] border-t-slate-600 px-2 py-5">
+      <div className="grid gap-2 border-t-[0.09rem] border-t-slate-600 p-6">
         {linksTabs.map((link, index) => (
           <NavLink
             onClick={() => {

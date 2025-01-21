@@ -41,21 +41,22 @@ export const linksTabs = [
 
 export const activeLinks = ({ isActive }) =>
   isActive
-    ? "hover:bg-gray-200 px-3 py-3 font-bold  rounded-lg"
-    : "hover:bg-gray-200 px-3 py-3 text-gray-500 rounded-lg";
+    ? "border-2 border-gray-900 bg-yellow-200 p-4 font-bold  rounded-lg shadow-sm"
+    : "border-2 border-transparent hover:border-gray-400  hover:bg-yellow-100 p-4 text-gray-500 rounded-lg";
 
 const Sidebar = () => {
   const { logout } = useAuth();
 
   return (
-    <div className="hidden xl:block 2xl:w-[20vw] w-[20vw] h-[100vh] py-3 bg-gray-100 overflow-scroll">
-      <div className="flex justify-between items-center py-6 px-4">
+    <div className="hidden xl:block w-[25vw] h-[100vh] overflow-scroll py-4">
+      <div className="flex justify-between items-center p-6">
         <Logo />
         <div className="flex gap-2 items-center">
           <UserCircle className="h-6 w-6" />
         </div>
       </div>
-      <div className="grid gap-3 border-t-[0.09rem] border-t-slate-600 px-2 py-5">
+      <hr className="mx-6 w-full"/>
+      <div className="grid gap-2 p-6">
         {linksTabs.map((link, index) => (
           <NavLink
             onClick={() => {
