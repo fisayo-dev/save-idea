@@ -49,7 +49,7 @@ const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const actualUser = await User.findOne({ email }).select("+password");
+        const actualUser = await User.findOne({ email })
         if (!actualUser) return res.status(400).json({ message: "Sorry, but you don't seem to have an account" });
 
         const isPasswordValid = await bcrypt.compare(password, actualUser.password);
@@ -66,7 +66,7 @@ const loginUser = async (req, res) => {
 const getUserDetails = async (req, res) => {
     const { id } = req.params;
     
-    const user = await User.findById(id).select('+password')
+    const user = await User.findById(id).select('-password')
     if (!user) return res.status(404).json({ message: 'The particular user does not exist' })
     
     res.status(200).json(user);
