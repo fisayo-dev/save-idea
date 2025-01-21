@@ -3,14 +3,10 @@ import Logo from "../Public/Logo";
 import { NavLink } from "react-router-dom";
 import { linksTabs } from "./Sidebar";
 import { useAuth } from "../../contexts/AuthContext";
+import { activeLinks } from "./Sidebar";
 
 const SidebarResponsive = () => {
   const { logout } = useAuth();
-  const activeLinks = ({ isActive }) =>
-    isActive
-      ? "hover:bg-gray-200 px-3 py-3 font-bold  rounded-lg"
-      : "hover:bg-gray-200 px-3 py-3 text-gray-500 rounded-lg";
-
   return (
     <div
       className="z-50 block xl:hidden w-[70vw]
