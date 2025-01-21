@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Sidebar, SidebarResponsive } from "../components";
 import { Message, MessageQuestion } from "iconsax-react";
-import { BellIcon, MenuIcon, RocketIcon } from "lucide-react";
+import { BellIcon, MenuIcon } from "lucide-react";
 import { useState } from "react";
 
 const AppOutlet = () => {
@@ -9,7 +9,7 @@ const AppOutlet = () => {
   return (
     <div className={`relative w-[100vw] block md:flex `}>
       <div
-        className={`bg-gray-200 md:hidden bg-opacity-60 z-30 absolute h-[100vh] w-[100vw] ${
+        className={`bg-gray-600 md:hidden bg-opacity-60 z-30 absolute h-[100vh] w-[100vw] ${
           turnMenuOn ? "block" : "hidden"
         }`}
         onClick={() => setTurnMenuOn(false)}

@@ -20,13 +20,13 @@ import {
     const { logout } = useAuth();
     const activeLinks = ({ isActive }) =>
       isActive
-        ? "hover:bg-slate-900 px-3 py-3 color-pink font-bold rounded-lg"
-        : "hover:bg-slate-900 px-3 py-3 text-slate-400 hover-color-pink rounded-lg";
+    ? "hover:bg-gray-200 px-3 py-3 font-bold  rounded-lg"
+    : "hover:bg-gray-200 px-3 py-3 text-gray-500 rounded-lg";
   
     const linksTabs = [
       {
-        text: "Dashboard",
-        link: "/dashboard",
+        text: "Ideas",
+        link: "/ideas",
         icon: <LayoutDashboardIcon className="h-6 w-6" />,
       },
       {
@@ -73,7 +73,7 @@ import {
     return (
       <div
         className="z-50 block xl:hidden w-[70vw]
-           h-[100vh] py-3 border-r-[0.1rem] border-r-slate-500 dark-bg-blue overflow-scroll"
+           h-[100vh] py-3 bg-gray-100 overflow-scroll"
       >
         <div className="flex justify-between items-center py-6 px-4">
           <Logo />
@@ -81,7 +81,7 @@ import {
             <UserCircle className="h-6 w-6" />
           </div>
         </div>
-        <div className="grid gap-2 border-t-[0.09rem] border-t-slate-600 px-2 py-5">
+        <div className="grid gap-3 border-t-[0.09rem] border-t-slate-600 px-2 py-5">
           {linksTabs.map((link, index) => (
             <NavLink
               onClick={() => {
@@ -91,9 +91,9 @@ import {
               to={link.link}
               className={activeLinks}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex text-xl items-center gap-2">
                 {link.icon}
-                <p>{link.text}</p>
+                <p className="capitalize">{link.text}</p>
               </div>
             </NavLink>
           ))}
