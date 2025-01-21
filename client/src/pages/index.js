@@ -6,6 +6,7 @@ import PageNotFound from "./public/PageNotFound";
 
 // Private Routes
 import Ideas from "./private/Ideas";
+import Profile from "./private/Profile";
 
-export { Landing, Login, Signup, Ideas, PageNotFound }
+export { Landing, Login, Signup, Ideas, PageNotFound, Profile }
 

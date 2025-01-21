@@ -9,7 +9,8 @@ import {
   Login,
   PageNotFound,
   Ideas,
-  Landing
+  Landing,
+  Profile,
 } from "./pages";
 import AppOutlet from "./outlets/AppOutlet";
 import PrivateRoutes from "./utils/PrivateRoutes";
@@ -25,6 +26,7 @@ function App() {
         <Route path="" element={<PrivateRoutes />}>
           <Route path="" element={<AppOutlet />}>
             <Route path="/ideas" element={<Ideas />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
         </Route>
       </>
