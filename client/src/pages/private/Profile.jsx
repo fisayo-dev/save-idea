@@ -4,10 +4,13 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
 
 const Profile = () => {
+  // User object context
   const { user } = useAuth();
-  // Fetching user detrails states
+  // Fetching user details states
   const [userDetailsLoading, setUserDetailsLoading] = useState([]);
-
+  // Beare token
+  const token = localStorage.getItem("TOKEN");
+  
   const getUserDetails = async () => {
     setUserDetailsLoading([]);
     const url =
@@ -15,9 +18,12 @@ const Profile = () => {
         ? "https://saveidea.netlify.app"
         : "";
     try {
-      const response = await axios.get(`${url}/api/users/${user}`);
-        const data = response.data;
-        console.log(data)
+      const response = await axios.get(`${url}/api/users/${user}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = response.data;
       setUserDetailsLoading(data);
     } catch (error) {
       setUserDetailsLoading(null);
@@ -37,7 +43,10 @@ const Profile = () => {
               <div className="relative grid md:flex items-center gap-6">
                 <div className="md:mx-0 mx-auto h-28 w-28 rounded-full bg-gray-300" />
                 <div className="flex flex-col gap-1 md:items-start items-center ">
-                  <h2 className="font-bold text-2xl">{userDetailsLoading.first_name} {userDetailsLoading.last_name}</h2>
+                  <h2 className="font-bold text-2xl">
+                    {userDetailsLoading.first_name}{" "}
+                    {userDetailsLoading.last_name}
+                  </h2>
                   <p className="">{userDetailsLoading.email}</p>
                   <p className="text-sm">Joined Yesterday</p>
                 </div>
