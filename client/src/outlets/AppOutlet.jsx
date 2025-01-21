@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Sidebar, SidebarResponsive } from "../components";
-import { Message } from "iconsax-react";
+import { Message, MessageQuestion } from "iconsax-react";
 import { BellIcon, MenuIcon, RocketIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -33,8 +33,8 @@ const AppOutlet = () => {
                 >
                   <MenuIcon className="h-7 w-7" />
                 </div>
-                <RocketIcon className="h-6 w-6 color-pink" />
-                <p className="hidden md:block">Premimum Plan</p>
+                <MessageQuestion className="h-6 w-6 text-gray-600" />
+                <p className="hidden md:block">Whats on your mind today?</p>
               </div>
               <div className="flex items-center gap-2 justify-end">
                 <BellIcon className="h-6 w-6" />
