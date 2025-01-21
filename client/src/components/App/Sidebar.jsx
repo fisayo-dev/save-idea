@@ -41,7 +41,7 @@ export const linksTabs = [
 
 export const activeLinks = ({ isActive }) =>
   isActive
-    ? "border-2 border-gray-900 bg-yellow-200 p-4 font-bold  rounded-lg shadow-sm"
+    ? "border-2 border-gray-900 bg-yellow p-4 font-bold  rounded-lg shadow-sm"
     : "border-2 border-transparent hover:border-gray-400  hover:bg-gray-100 p-4 text-gray-500 rounded-lg";
 
 const Sidebar = () => {
