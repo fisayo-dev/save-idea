@@ -58,7 +58,7 @@ import {
             <UserCircle className="h-6 w-6" />
           </div>
         </div>
-        <div className="grid gap-2 border-t-[0.09rem] border-t-slate-600 px-2 py-5">
+        <div className="grid gap-3 border-t-[0.09rem] border-t-slate-600 px-2 py-5">
           {linksTabs.map((link, index) => (
             <NavLink
               onClick={() => {
@@ -68,7 +68,7 @@ import {
               to={link.link}
               className={activeLinks}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex text-xl items-center gap-2">
                 {link.icon}
                 <p className="capitalize">{link.text}</p>
               </div>
