@@ -1,8 +1,5 @@
 import {
-  Box,
-    LayoutDashboardIcon,
     Lightbulb,
-    PiggyBankIcon,
     PlusCircle,
     PowerIcon,
     UserCircle,
