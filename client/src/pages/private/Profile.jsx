@@ -1,4 +1,4 @@
-import { Edit, Rocket } from "lucide-react";
+import { Edit } from "lucide-react";
 
 const Profile = () => {
   return (
