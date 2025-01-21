@@ -1,6 +1,6 @@
 import { FormSide } from "../../components";
 import { User, Key, Eye, EyeSlash } from "iconsax-react";
-import { MailIcon, Rocket, Users } from "lucide-react";
+import { Loader2Icon, MailIcon, Rocket, Users } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Google from "../../assets/vectors/Google.svg";
@@ -25,16 +25,18 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState("");
   const [repeatPasswordError, setRepeatPasswordError] = useState("");
 
-  const { user, login } = useAuth()
-  const navigate = useNavigate()
+  // Loading state
+  const [loading, setLoading] = useState(false);
+
+  const { user, login } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
-      navigate('/home')
-    } 
-  },[user,navigate])
+      navigate("/home");
+    }
+  }, [user, navigate]);
 
- 
   const validateInputs = () => {
     let isValid = true;
 
@@ -70,14 +72,14 @@ const Signup = () => {
   };
 
   const submitUserForm = async () => {
+    setLoading(true);
     try {
       const response = await axios.post("/api/users/signup", {
-          first_name: firstName,
-          last_name: lastName,
-          email,
-          password,
-      },);
-      
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        password,
+      });
       if (response.status === 201) {
         const { token } = response.data;
         login(token);
@@ -89,10 +91,9 @@ const Signup = () => {
         "Error occurred during signup:",
         error.response?.data || error.message
       );
-      // Optionally set an error message state to inform the user
     }
+    setLoading(false);
   };
-  
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -104,7 +105,6 @@ const Signup = () => {
         setRepeatPasswordError("");
 
         submitUserForm();
-        alert("Account created successfully!");
       }
     } else {
       if (validateInputs()) {
@@ -244,12 +244,24 @@ const Signup = () => {
         <div className="flex justify-center gap-3">
           <button
             type="submit"
-            className="shadow-md text-[0.9rem] px-4 py-3 flex items-center justify-center gap-2 rounded-full bg-yellow hover-dark-bg-yellow"
+            disabled={loading}
+            className="shadow-md disabled:cursor-not-allowed disabled:bg-yellow-300 disabled:text-gray-800 text-[0.9rem] px-4 py-3 flex items-center justify-center gap-2 rounded-full bg-yellow hover-dark-bg-yellow"
           >
-            <Rocket className="h-4 w-4 md:h-6 md:w-6" />
-            <p className="capitalize">
+            {loading ? (
+              <Loader2Icon className="animate-spin h-6 w-6" />
+            ) : (
+              <Rocket className="h-4 w-4 md:h-6 md:w-6" />
+            )}
+            {!loading ? (
+
+              <p className="capitalize">
               {showRepeatPassword ? "Submit" : "Signup"}
             </p>
+            ) : (
+                <p className="capitalize">
+                  Signing up
+            </p>
+            )}
           </button>
           <button className="shadow-md text-[0.9rem] px-4 py-3 font-bold flex items-center justify-center gap-2 rounded-full bg-yellow-100 text-gray-900 hover:bg-yellow-200">
             <img src={Google} width={20} height={20} />
