@@ -10,6 +10,40 @@ import {
   
   import { useAuth } from "../../contexts/AuthContext";
   
+  export const linksTabs = [
+    {
+      text: "Ideas",
+      link: "/ideas",
+      icon: <Lightbulb className="h-6 w-6" />,
+    },
+    {
+      text: "create",
+      link: "/create",
+      icon: <PlusCircle className="h-6 w-6" />,
+    },
+    {
+      text: "starred",
+      link: "/starred",
+      icon: <Star1 className="h-6 w-6" />,
+    },
+    {
+      text: "bin",
+      link: "/bin",
+      icon: <Trash className="h-6 w-6" />,
+    },
+    {
+      text: "profile",
+      link: "/profile",
+      icon: <UserCircle className="h-6 w-6" />,
+    },
+    
+    {
+      text: "Logout",
+      link: "/",
+      icon: <PowerIcon className="h-6 w-6" />,
+    },
+];
+  
   const Sidebar = () => {
     const { logout } = useAuth();
     const activeLinks = ({ isActive }) =>
@@ -17,39 +51,6 @@ import {
         ? "hover:bg-gray-200 px-3 py-3 font-bold  rounded-lg"
         : "hover:bg-gray-200 px-3 py-3 text-gray-500 rounded-lg";
   
-    const linksTabs = [
-      {
-        text: "Ideas",
-        link: "/ideas",
-        icon: <Lightbulb className="h-6 w-6" />,
-      },
-      {
-        text: "create",
-        link: "/create",
-        icon: <PlusCircle className="h-6 w-6" />,
-      },
-      {
-        text: "starred",
-        link: "/starred",
-        icon: <Star1 className="h-6 w-6" />,
-      },
-      {
-        text: "bin",
-        link: "/bin",
-        icon: <Trash className="h-6 w-6" />,
-      },
-      {
-        text: "profile",
-        link: "/profile",
-        icon: <UserCircle className="h-6 w-6" />,
-      },
-      
-      {
-        text: "Logout",
-        link: "/",
-        icon: <PowerIcon className="h-6 w-6" />,
-      },
-    ];
     return (
       <div className="hidden xl:block 2xl:w-[20vw] w-[20vw] h-[100vh] py-3 bg-gray-100 overflow-scroll">
         <div className="flex justify-between items-center py-6 px-4">
