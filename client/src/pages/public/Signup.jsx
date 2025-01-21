@@ -129,7 +129,7 @@ const Signup = () => {
           <>
             <div className="grid gap-3">
               <div className="flex gap-4 items-center">
-                <div className="grid gap-3">
+                <div className="grid gap-3 w-full ">
                   <label className="font-bold text-gray-800">First Name</label>
                   <div className="border border-slate-600 rounded-full p-4">
                     <div className="flex items-center gap-2">
@@ -147,7 +147,7 @@ const Signup = () => {
                     <p className="text-red-500 text-sm">{firstNameError}</p>
                   )}
                 </div>
-                <div className="grid gap-3">
+                <div className="grid gap-3 w-full">
                   <label className="font-bold text-gray-800">Last Name</label>
                   <div className="border border-slate-600 rounded-full p-4">
                     <div className="flex items-center gap-2">
