@@ -1,6 +1,6 @@
 import CreateIdea from "./App/CreateIdea";
 import IdeaCard from "./App/IdeaCard";
-import Sidebar from "./App/SideBar";
+import Sidebar from "./App/Sidebar";
 import SidebarResponsive from "./App/SidebarResponsive";
 import FormSide from "./Auth/FormSide";
 import Footer from "./Landing/Footer";
