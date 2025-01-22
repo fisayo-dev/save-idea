@@ -8,7 +8,7 @@ const Profile = () => {
   const { user } = useAuth();
   // Fetching user details states
   const [userDetailsLoading, setUserDetailsLoading] = useState([]);
-  // Beare token
+  // Bearer token
   const token = localStorage.getItem("TOKEN");
   
   const getUserDetails = async () => {
