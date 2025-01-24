@@ -4,7 +4,7 @@ import { Loader2Icon, MailIcon, Rocket } from "lucide-react";
 import { useEffect, useState } from "react";
 import Google from "../../assets/vectors/Google.svg";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../../axiosConfig";
 import { useAuth } from "../../contexts/AuthContext";
 
 const Login = () => {
@@ -38,7 +38,7 @@ const Login = () => {
 
     // When there are no errors, login in user
     try {
-      const response = await axios.post("/api/users/login", {
+      const response = await axiosInstance.post("/users/login", {
         email,
         password,
       });
