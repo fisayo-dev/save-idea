@@ -1,4 +1,6 @@
+import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
+import { Textarea } from "../../components/ui/textarea";
 
 
 const CreateIdea = () => {
@@ -16,7 +18,22 @@ const CreateIdea = () => {
             </div>
             <div className="grid gap-3">
               <label>Description</label>
-              <Input type="text" placeholder="Give your idea a name" />
+              <Textarea type="text" className="h-52" placeholder="Tell us more about your idea" />
+            </div>
+            <div className="grid gap-3">
+              <label>Category</label>
+              <Textarea type="text" placeholder="Give your idea a name" />
+            </div>
+            <div className="grid gap-3">
+              <label>Inspiration source</label>
+              <Textarea type="text" className="h-52" placeholder="Where did you get this brilliant idea from?" />
+            </div>
+            <div className="grid gap-3">
+              <label>Problem to be solved</label>
+              <Textarea type="text" className="h-52" placeholder="What problem do you think this idea will be solving?" />
+            </div>
+            <div>
+              <Button>Create the idea</Button>
             </div>
           </form>
         </div>
