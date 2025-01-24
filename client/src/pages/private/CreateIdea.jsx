@@ -97,8 +97,6 @@ const CreateIdea = () => {
         creator_id: user,
       });
       const id = response.data.createdIdea._id;
-      alert("Idea creation successful");
-      console.log(response.data);
       navigate(`/ideas/${id}`);
     } catch (error) {
       setCreateError(error);
