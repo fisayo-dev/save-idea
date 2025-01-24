@@ -108,7 +108,9 @@ const Ideas = () => {
                       <div className="h-[150px] w-full cursor-pointer rounded-xl hover:bg-gray-300 bg-gray-200"></div>
                       <div className="flex items-center justify-between ">
                         <div>
-                          <h2 className="font-bold text-xl">{idea.title}</h2>
+                          <h2 className="font-bold text-xl"> {idea.title.length > 13
+                              ? `${idea.title.substring(0, 13)}...`
+                              : idea.title}</h2>
                           <p className="overflow-x-hidden">
                             {idea.description.length > 30
                               ? `${idea.description.substring(0, 30)}...`
@@ -120,7 +122,9 @@ const Ideas = () => {
                       <div className="flex text-sm text-gray-700 items-center justify-between">
                         <div className="flex items-center gap-1">
                           <LucideTarget className="h-5 w-5 text-black" />
-                          <p className="capitalize">{idea.category}</p>
+                          <p className="capitalize"> {idea.category.length > 15
+                              ? `${idea.category.substring(0, 15)}...`
+                              : idea.category}</p>
                         </div>
                         <p>{getDateInEnglish(idea.created_at)} </p>
                       </div>
