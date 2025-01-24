@@ -1,29 +1,20 @@
 import { Edit } from "lucide-react";
-import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
+import axiosInstance from "../../../axiosConfig";
 
 const Profile = () => {
   // User object context
   const { user } = useAuth();
   // Fetching user details states
   const [userDetailsLoading, setUserDetailsLoading] = useState([]);
-  // Bearer token
-  const token = localStorage.getItem("TOKEN");
-  
   const getUserDetails = async () => {
     setUserDetailsLoading([]);
-    const url =
-      process.env.NODE_ENV == "production"
-        ? "https://saveidea.netlify.app"
-        : "";
+
     try {
-      const response = await axios.get(`${url}/api/users/${user}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axiosInstance.get(`users/${user}`);
       const data = response.data;
+      console.log(data)
       setUserDetailsLoading(data);
     } catch (error) {
       setUserDetailsLoading(null);
