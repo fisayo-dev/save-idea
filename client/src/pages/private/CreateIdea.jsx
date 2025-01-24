@@ -5,10 +5,11 @@ import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const CreateIdea = () => {
   const { user } = useAuth();
-
+  const navigate = useNavigate();
   const [createLoading, setCreateLoading] = useState(false);
   const [createError, setCreateError] = useState(null);
   const [title, setTitle] = useState("");
@@ -96,6 +97,7 @@ const CreateIdea = () => {
         creator_id: user,
       });
       alert("Idea creation successful");
+      navigate("/ideas");
     } catch (error) {
       setCreateError(error);
     } finally {

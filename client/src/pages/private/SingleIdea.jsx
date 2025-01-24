@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../../../axiosConfig";
 import { useAuth } from "../../contexts/AuthContext";
 import { Button } from "../../components/ui/button";
@@ -31,7 +31,7 @@ const SingleIdea = () => {
     setDeleteLoading(true);
     try {
       await axiosInstance.delete(`/ideas/${id}`, {
-        data: { creator_id: user }, 
+        data: { creator_id: user },
       });
       setError(null);
       setIdea(null);
@@ -54,10 +54,12 @@ const SingleIdea = () => {
         {!error && idea && (
           <div className="grid gap-4">
             <div className="flex items-center justify-between">
-              <Button className="flex items-center gap-2">
-                <Back className="h-8 w-8" />
-                <p>Back</p>
-              </Button>
+              <Link to="/ideas">
+                <Button className="flex items-center gap-2">
+                  <Back className="h-8 w-8" />
+                  <p>Back</p>
+                </Button>
+              </Link>
               {deleteLoading && (
                 <div className="bg-gray-200 rounded-full px-4 py-2 cursor-not-allowed opacity-70">
                   Deleting idea...
