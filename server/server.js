@@ -3,6 +3,8 @@ import * as dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import userRoutes from './routes/userRoutes.js'
+import ideaRoutes from './routes/ideaRoutes.js'
+
 dotenv.config()
 
 const PORT = process.env.PORT;
@@ -26,6 +28,7 @@ app.use(express.json())
 
 // Server Routes
 app.use('/api/users/', userRoutes)
+app.use('/api/ideas/', ideaRoutes)
 
 const MONGO_URI = process.env.NODE_ENV == 'production' ? productionURI: localURI
 
