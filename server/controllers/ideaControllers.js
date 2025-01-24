@@ -36,7 +36,7 @@ const deleteIdea = async (req, res) => {
 const getIdeas = async (req, res) => { 
     const { creator_id } = req.params;
     try {
-        const ideas = await Idea.find({ creator_id })
+        const ideas = await Idea.find({ creator_id }).sort({updated_at: -1})
         if(!ideas) return res.status(404).json({ message: "Oops, this user doesn't have an idea" })
         res.status(200).json({ message: 'Ideas fetched successfully', ideas })
     } catch (err) {
