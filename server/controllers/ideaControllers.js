@@ -13,3 +13,5 @@ const getSingleIdea = async (req, res) => {
 const updateIdea = async (req, res) => { 
 
 }
+
+export { createIdea, deleteIdea, getIdeas, getSingleIdea, updateIdea }
