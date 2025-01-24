@@ -53,8 +53,8 @@ const CreateIdea = () => {
     if (!category.trim()) {
       newErrors.category = "Category is required.";
       isValid = false;
-    } else if (category.split(" ").length < 3) {
-      newErrors.category = "Category must contain at least 3 words.";
+    } else if (category.length < 3) {
+      newErrors.category = "Category must contain at 3 letters.";
       isValid = false;
     }
     if (!inspirationSource.trim()) {
@@ -113,6 +113,9 @@ const CreateIdea = () => {
             What&apos;s on your mind today 🤔
           </h2>
           <form onSubmit={createNewIdea} className="grid gap-3">
+          {createError && (
+                <p className="bg-red-500 px-3 py-4 text-sm">{createError}</p>
+              )}
             {/* Title Field */}
             <div className="grid gap-3">
               <label>Title</label>
