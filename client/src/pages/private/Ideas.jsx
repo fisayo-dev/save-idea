@@ -7,18 +7,54 @@ import { useAuth } from "../../contexts/AuthContext";
 const Ideas = () => {
   const { user } = useAuth();
   const [ideasList, setIdeasList] = useState([]);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
 
   const fetchIdeas = async () => {
     try {
       const response = await axiosInstance.get(`/ideas/${user}`);
       const data = response.data;
       setIdeasList(data.ideas);
-      setError(null); 
+      setError(null);
     } catch (err) {
       setIdeasList([]);
       setError(err.message || "An unknown error occurred");
     }
+  };
+
+  const getDateInEnglish = (date) => {
+    const day = new Date(date).getDate();
+    const year = new Date(date).getFullYear();
+
+    if (new Date().getDate() - day === 1) return "Yesterday";
+    if (new Date().getDate() - day === 2) return "2 days ago";
+    if (new Date().getDate() - day === 3) return "3 days ago";
+    if (new Date().getDate() - day === 4) return "4 days ago";
+    if (new Date().getDate() - day === 5) return "5 days ago";
+    if (new Date().getDate() - day === 6) return "6 days ago";
+    if (new Date().getDate() - day === 0) return "Today";
+    if (new Date().getDate() - day >= 7) return "A week ago";
+    if (new Date().getDate() - day >= 14) return "2 weeks ago";
+    if (new Date().getDate() - day >= 21) return "3 weeks ago";
+    if (new Date().getDate() - day >= 28) return "a month ago";
+
+    const monthInEnglish = [
+      "Jan",
+      "Feb",
+      "March",
+      "April",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const monthIndex = new Date(date).getMonth();
+
+    const month = monthInEnglish[monthIndex];
+
+    return `${day} ${month}, ${year}`;
   };
 
   useEffect(() => {
@@ -80,9 +116,9 @@ const Ideas = () => {
                       <div className="flex text-sm text-gray-700 items-center justify-between">
                         <div className="flex items-center gap-1">
                           <LucideTarget className="h-5 w-5 text-black" />
-                          <p className="capitalize">{idea.status}</p>
+                          <p className="capitalize">{idea.category}</p>
                         </div>
-                        <p>{idea.date_created}</p>
+                        <p>{getDateInEnglish(idea.created_at)} </p>
                       </div>
                     </div>
                   ))}
