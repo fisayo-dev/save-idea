@@ -8,6 +8,7 @@ import PageNotFound from "./public/PageNotFound";
 import Ideas from "./private/Ideas";
 import Profile from "./private/Profile";
 import CreateIdea from "./private/CreateIdea";
+import SingleIdea from "./private/SingleIdea";
 
-export { Landing, Login, Signup, Ideas, PageNotFound, Profile, CreateIdea }
+export { Landing, Login, Signup, Ideas, PageNotFound, Profile, CreateIdea, SingleIdea }
 

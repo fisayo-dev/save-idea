@@ -11,6 +11,7 @@ import {
   Ideas,
   Landing,
   Profile,
+  SingleIdea,
 } from "./pages";
 import AppOutlet from "./outlets/AppOutlet";
 import PrivateRoutes from "./utils/PrivateRoutes";
@@ -27,6 +28,7 @@ function App() {
         <Route path="" element={<PrivateRoutes />}>
           <Route path="" element={<AppOutlet />}>
             <Route path="/ideas" element={<Ideas />} />
+            <Route path="/ideas/:id" element={<SingleIdea />} />
             <Route path="/create" element={<CreateIdea />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
