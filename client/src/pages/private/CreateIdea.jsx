@@ -81,14 +81,12 @@ const CreateIdea = () => {
   const createNewIdea = async (e) => {
     e.preventDefault();
 
-    // Validate fields before submitting
     if (!validateFields()) {
       return;
     }
 
     setCreateLoading(true);
     try {
-      // Make a POST request to the server to create a new idea
       await axiosInstance.post("/ideas", {
         title,
         description,
