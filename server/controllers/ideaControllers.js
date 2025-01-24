@@ -44,8 +44,8 @@ const getIdeas = async (req, res) => {
     }
 }
 const getSingleIdea = async (req, res) => { 
-    const { creator_id } = req.body;
-    const { id } = req.params;
+    const { id, creator_id } = req.params;
+    
     try {
         const idea = await Idea.findOne({ creator_id, _id: id })
         if (!idea) return res.status(401).json({ message: 'This idea does not exist' })

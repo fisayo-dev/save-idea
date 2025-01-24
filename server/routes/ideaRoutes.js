@@ -6,7 +6,7 @@ import { getIdeas, getSingleIdea, createIdea, updateIdea, deleteIdea } from '../
 import authMiddleware from '../middlewares/authMiddleware.js';
 
 router.get('/:creator_id', getIdeas);  // GET request to fetch all ideas
-router.post('/:id', getSingleIdea);  // GET request to fetch a single idea
+router.get('/:id/creator/:creator_id', getSingleIdea);  // GET request to fetch a single idea
 router.post('/', createIdea);  // POST request to create a new idea
 router.put('/:id', updateIdea);  // PUT request to update an idea
 router.delete('/:id', deleteIdea);  // DELETE request to delete an idea

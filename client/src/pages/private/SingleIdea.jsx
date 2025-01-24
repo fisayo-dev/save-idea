@@ -11,9 +11,7 @@ const SingleIdea = () => {
 
   const getIdea = async () => {
     try {
-      const response = await axiosInstance.post(`/ideas/${id}`, {
-        creator_id: user,
-      });
+      const response = await axiosInstance.get(`/ideas/${id}/creator/${user}`);
       const data = response.data;
       setIdea(data.idea);
       setError(null);
