@@ -45,7 +45,25 @@ const getSingleIdea = async (req, res) => {
     }
 }
 const updateIdea = async (req, res) => { 
+    const { title, description, inspiration_source, category, creator_id, problem_to_solve } = req.body;
 
+    const { id } = req.params;
+    const ideaToBeUpdated = await Idea.findOne({ creator_id, _id: id })
+    if (!ideaToBeUpdated) return res.status(404).json({ message: 'This idea does not exist' })
+    try {
+        const updatedIdea = await Idea.findByIdAndUpdate(id, {
+            title,
+            description,
+            inspiration_source,
+            category,
+            creator_id,
+            problem_to_solve,
+            updated_at: Date.now()  // Update the updated_at field  
+        }, { new: true })
+        res.status(200).json({ message: 'Idea updated successfully', updatedIdea })
+    } catch (err) {
+        res.status(500).json({ message: 'Error occurred when trying to update idea', error: err.message })
+    }
 }
 
 export { createIdea, deleteIdea, getIdeas, getSingleIdea, updateIdea }
