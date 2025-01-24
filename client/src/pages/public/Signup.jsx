@@ -4,9 +4,9 @@ import { Loader2Icon, MailIcon, Rocket, Users } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Google from "../../assets/vectors/Google.svg";
-import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../../axiosConfig";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -74,7 +74,7 @@ const Signup = () => {
   const submitUserForm = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("/api/users/signup", {
+      const response = await axiosInstance.post("/users/signup", {
         first_name: firstName,
         last_name: lastName,
         email,
@@ -253,14 +253,11 @@ const Signup = () => {
               <Rocket className="h-4 w-4 md:h-6 md:w-6" />
             )}
             {!loading ? (
-
               <p className="capitalize">
-              {showRepeatPassword ? "Submit" : "Signup"}
-            </p>
+                {showRepeatPassword ? "Submit" : "Signup"}
+              </p>
             ) : (
-                <p className="capitalize">
-                  Signing up
-            </p>
+              <p className="capitalize">Signing up</p>
             )}
           </button>
           <button className="shadow-md text-[0.9rem] px-4 py-3 font-bold flex items-center justify-center gap-2 rounded-full bg-yellow-100 text-gray-900 hover:bg-yellow-200">
