@@ -1,6 +1,23 @@
 const createIdea = async (req, res) => { 
-    
+    const { title, description, inspiration_source, category, creator_id, problem_to_solve } = req.body;
+
+    try {
+        const newIdea = new Idea({
+            title,
+            description,
+            inspiration_source,
+            category,
+            creator_id,
+            problem_to_solve
+        })
+        const createdIdea = await newIdea.save()
+        res.status(201).json({ message: 'Idea created successfully', createdIdea })
+    } catch (err) { 
+        res.status(500).json({ message: 'Error occurred when trying to create idea', error: err.message })
+    }
+
 }
+
 const deleteIdea = async (req, res) => { 
 
 }
