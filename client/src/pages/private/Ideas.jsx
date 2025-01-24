@@ -108,8 +108,8 @@ const Ideas = () => {
                       <div>
                         <h2 className="font-bold text-xl">{idea.title}</h2>
                         <p className="">
-                          {idea.description.length > 50
-                            ? `${idea.description.substring(0, 50)}...`
+                          {idea.description.length > 30 
+                            ? `${idea.description.substring(0, 30)}...`
                             : idea.description}
                         </p>
                       </div>
