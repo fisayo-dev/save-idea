@@ -26,14 +26,23 @@ const getIdeas = async (req, res) => {
     const { creator_id } = req.body;
     try {
         const ideas = await Idea.find({ creator_id })
-        if(!ideas) return res.status(404).json({ message: 'Oops, thisuser doen;t have an idea' })
+        if(!ideas) return res.status(404).json({ message: "Oops, this user doesn't have an idea" })
         res.status(200).json({ message: 'Ideas fetched successfully', ideas })
     } catch (err) {
         
     }
 }
 const getSingleIdea = async (req, res) => { 
+    const { creator_id } = req.body;
+    const { id } = req.params;
+    try {
+        const idea = await Idea.findOne({ creator_id, _id: id })
+        if (!idea) return res.status(401).json({ message: 'This idea does not exist' })
+        res.status(200).json({ message: 'Idea fetched successfully', idea })
 
+    } catch (err) {
+        res.status(500).send({ message: 'Error occurred when trying to fetch idea', error: err.message })
+    }
 }
 const updateIdea = async (req, res) => { 
 
