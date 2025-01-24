@@ -19,20 +19,23 @@ const createIdea = async (req, res) => {
 
 }
 
-const deleteIdea = async (req, res) => { 
+const deleteIdea = async (req, res) => {
     const { id } = req.params;
     const { creator_id } = req.body;
-
+  
     try {
-        const ideaToBeDeleted = await Idea.findOne({ creator_id, _id: id })
-        if (!ideaToBeDeleted) res.status(401).json({ message: "Sorry, looks like this idea doesn't exist" })
-        
-        await Idea.findByIdAndDelete(id)
-        res.status(200).json({ message: 'Your idea has been successfully deleted' })        
+      const ideaToBeDeleted = await Idea.findOneAndDelete({ creator_id, _id: id });
+  
+      if (!ideaToBeDeleted) {
+        return res.status(404).json({ message: "Sorry, looks like this idea doesn't exist" });
+      }
+  
+      return res.status(200).json({ message: 'Your idea has been successfully deleted' });
     } catch (err) {
-        res.status(500).json({message:'Error occurred when trying to delete the idea '})
+      console.error('Error deleting idea:', err);  
+      return res.status(500).json({ message: 'An error occurred while trying to delete the idea' });
     }
-}
+  };
 const getIdeas = async (req, res) => { 
     const { creator_id } = req.params;
     try {
