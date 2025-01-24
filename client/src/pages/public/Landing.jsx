@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Rocket, SearchIcon } from "lucide-react";
 import landing_blub from "../../assets/vectors/landing_blub.png";
 import { useEffect } from "react";
 import { Header } from "../../components";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Landing = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate()
+
   const fetchData = async () => {
     try {
       const res = await fetch("/api/");
@@ -16,8 +20,11 @@ const Landing = () => {
   };
 
   useEffect(() => {
+    if (user) {
+      navigate("/ideas");
+    }
     fetchData();
-  }, []);
+  }, [user]);
   return (
     <div>
       <Header />
