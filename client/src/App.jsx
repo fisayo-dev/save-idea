@@ -14,7 +14,7 @@ import {
 } from "./pages";
 import AppOutlet from "./outlets/AppOutlet";
 import PrivateRoutes from "./utils/PrivateRoutes";
-import { CreateIdea } from "./components";
+import { CreateIdea } from "./pages";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
