@@ -81,7 +81,7 @@ const CreateIdea = () => {
   const createNewIdea = async (e) => {
     e.preventDefault();
 
-    if (!validateFields()) {
+    if (!validateFields()) {    
       return;
     }
 

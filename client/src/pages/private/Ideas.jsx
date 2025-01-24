@@ -1,4 +1,4 @@
-import { SearchNormal } from "iconsax-react";
+import { SearchNormal, Star, Star1 } from "iconsax-react";
 import { LayoutGrid, LayoutList, LucideTarget } from "lucide-react";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../axiosConfig";
@@ -105,13 +105,16 @@ const Ideas = () => {
                   {ideasList.map((idea, index) => (
                     <div key={index} className="grid gap-2">
                       <div className="h-[150px] w-full cursor-pointer rounded-xl hover:bg-gray-300 bg-gray-200"></div>
-                      <div>
-                        <h2 className="font-bold text-xl">{idea.title}</h2>
-                        <p className="">
-                          {idea.description.length > 30 
-                            ? `${idea.description.substring(0, 30)}...`
-                            : idea.description}
-                        </p>
+                      <div className="flex items-center justify-between ">
+                        <div>
+                          <h2 className="font-bold text-xl">{idea.title}</h2>
+                          <p className="overflow-x-hidden">
+                            {idea.description.length > 30
+                              ? `${idea.description.substring(0, 30)}...`
+                              : idea.description}
+                          </p>
+                        </div>
+                        <Star1 />
                       </div>
                       <div className="flex text-sm text-gray-700 items-center justify-between">
                         <div className="flex items-center gap-1">
