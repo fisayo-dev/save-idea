@@ -32,7 +32,7 @@ const CreateIdea = () => {
               <label>Problem to be solved</label>
               <Textarea type="text" className="h-52" placeholder="What problem do you think this idea will be solving?" />
             </div>
-            <div>
+            <div className="mx-auto my-5">
               <Button>Create the idea</Button>
             </div>
           </form>
