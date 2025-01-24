@@ -1,3 +1,4 @@
+import Idea from '../models/Idea.js'
 const createIdea = async (req, res) => { 
     const { title, description, inspiration_source, category, creator_id, problem_to_solve } = req.body;
 
@@ -7,8 +8,8 @@ const createIdea = async (req, res) => {
             description,
             inspiration_source,
             category,
+            problem_to_solve,
             creator_id,
-            problem_to_solve
         })
         const createdIdea = await newIdea.save()
         res.status(201).json({ message: 'Idea created successfully', createdIdea })

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const ideaSchema = new mongoose.Schema({
     title: { type: 'String', required: true },
-    descritption: { type: 'String', required: true },
+    description: { type: 'String', required: true },
     problem_to_solve: { type: 'String', required: true },
     inspiration_source: { type: 'String', required: true },
     category: { type: 'String', required: true },
