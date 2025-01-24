@@ -17,8 +17,75 @@ const CreateIdea = () => {
   const [inspirationSource, setInspirationSource] = useState("");
   const [problemToSolve, setProblemToSolve] = useState("");
 
+  // State for field errors
+  const [errors, setErrors] = useState({
+    title: "",
+    description: "",
+    category: "",
+    inspirationSource: "",
+    problemToSolve: "",
+  });
+
+  // Validation function
+  const validateFields = () => {
+    const newErrors = {
+      title: "",
+      description: "",
+      category: "",
+      inspirationSource: "",
+      problemToSolve: "",
+    };
+
+    let isValid = true;
+
+    // Check if fields are empty
+    if (!title.trim()) {
+      newErrors.title = "Title is required.";
+      isValid = false;
+    }
+    if (!description.trim()) {
+      newErrors.description = "Description is required.";
+      isValid = false;
+    } else if (description.length < 20) {
+      newErrors.description = "Description must be at least 20 characters.";
+      isValid = false;
+    }
+    if (!category.trim()) {
+      newErrors.category = "Category is required.";
+      isValid = false;
+    } else if (category.split(" ").length < 3) {
+      newErrors.category = "Category must contain at least 3 words.";
+      isValid = false;
+    }
+    if (!inspirationSource.trim()) {
+      newErrors.inspirationSource = "Inspiration source is required.";
+      isValid = false;
+    } else if (inspirationSource.length < 20) {
+      newErrors.inspirationSource =
+        "Inspiration source must be at least 20 characters.";
+      isValid = false;
+    }
+    if (!problemToSolve.trim()) {
+      newErrors.problemToSolve = "Problem to solve is required.";
+      isValid = false;
+    } else if (problemToSolve.length < 20) {
+      newErrors.problemToSolve =
+        "Problem to solve must be at least 20 characters.";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const createNewIdea = async (e) => {
     e.preventDefault();
+
+    // Validate fields before submitting
+    if (!validateFields()) {
+      return;
+    }
+
     setCreateLoading(true);
     try {
       // Make a POST request to the server to create a new idea
@@ -30,13 +97,14 @@ const CreateIdea = () => {
         problem_to_solve: problemToSolve,
         creator_id: user,
       });
-      alert('Idea creation successful')
+      alert("Idea creation successful");
     } catch (error) {
       setCreateError(error);
     } finally {
       setCreateLoading(false);
     }
   };
+
   return (
     <div className="2xl:container mx-auto">
       <div className="py-6">
@@ -45,6 +113,7 @@ const CreateIdea = () => {
             What&apos;s on your mind today 🤔
           </h2>
           <form onSubmit={createNewIdea} className="grid gap-3">
+            {/* Title Field */}
             <div className="grid gap-3">
               <label>Title</label>
               <Input
@@ -53,7 +122,12 @@ const CreateIdea = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
               />
+              {errors.title && (
+                <p className="text-red-500 text-sm">{errors.title}</p>
+              )}
             </div>
+
+            {/* Description Field */}
             <div className="grid gap-3">
               <label>Description</label>
               <Textarea
@@ -63,7 +137,12 @@ const CreateIdea = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 value={description}
               />
+              {errors.description && (
+                <p className="text-red-500 text-sm">{errors.description}</p>
+              )}
             </div>
+
+            {/* Category Field */}
             <div className="grid gap-3">
               <label>Category</label>
               <Textarea
@@ -72,7 +151,12 @@ const CreateIdea = () => {
                 onChange={(e) => setCategory(e.target.value)}
                 value={category}
               />
+              {errors.category && (
+                <p className="text-red-500 text-sm">{errors.category}</p>
+              )}
             </div>
+
+            {/* Inspiration Source Field */}
             <div className="grid gap-3">
               <label>Inspiration source</label>
               <Textarea
@@ -82,7 +166,12 @@ const CreateIdea = () => {
                 onChange={(e) => setInspirationSource(e.target.value)}
                 value={inspirationSource}
               />
+              {errors.inspirationSource && (
+                <p className="text-red-500 text-sm">{errors.inspirationSource}</p>
+              )}
             </div>
+
+            {/* Problem to Solve Field */}
             <div className="grid gap-3">
               <label>Problem to be solved</label>
               <Textarea
@@ -92,11 +181,16 @@ const CreateIdea = () => {
                 onChange={(e) => setProblemToSolve(e.target.value)}
                 value={problemToSolve}
               />
+              {errors.problemToSolve && (
+                <p className="text-red-500 text-sm">{errors.problemToSolve}</p>
+              )}
             </div>
+
+            {/* Submit Button */}
             <div className="mx-auto my-5">
               <Button
                 disabled={createLoading}
-                className="flex items-center gap-"
+                className="flex items-center gap-2"
               >
                 {createLoading && <Loader2Icon className="animate-spin" />}
                 <p>{createLoading ? "Creating idea" : "Create the idea"}</p>
