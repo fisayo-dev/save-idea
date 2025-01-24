@@ -14,6 +14,7 @@ import {
 } from "./pages";
 import AppOutlet from "./outlets/AppOutlet";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import { CreateIdea } from "./components";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -26,6 +27,7 @@ function App() {
         <Route path="" element={<PrivateRoutes />}>
           <Route path="" element={<AppOutlet />}>
             <Route path="/ideas" element={<Ideas />} />
+            <Route path="/create" element={<CreateIdea />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
         </Route>
