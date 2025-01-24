@@ -1,4 +1,4 @@
-import { SearchNormal, Star, Star1 } from "iconsax-react";
+import { Note, SearchNormal, Star, Star1 } from "iconsax-react";
 import { LayoutGrid, LayoutList, LucideTarget } from "lucide-react";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../axiosConfig";
@@ -77,7 +77,12 @@ const Ideas = () => {
 
           {/* Display message when no ideas are available */}
           {!error && ideasList.length === 0 && (
-            <p className="text-center">You don't have any ideas yet</p>
+            <div className="grid h-[300px] p-2 bg-gray-200 w-full place-items-center rounded-2xl">
+              <div className="flex flex-col items-center ">
+                <Note className="md:h-52 md:w-52 h-36 w-36"/>
+                <p className="text-center">You don't have any ideas yet</p>
+              </div>
+            </div>
           )}
 
           {/* Display ideas when available */}
@@ -104,13 +109,20 @@ const Ideas = () => {
               <div className="my-2">
                 <div className="grid  2xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 md:gap-6 gap-8 items-start">
                   {ideasList.map((idea, index) => (
-                    <Link to={`/ideas/${idea._id}`} key={index} className="grid gap-2">
+                    <Link
+                      to={`/ideas/${idea._id}`}
+                      key={index}
+                      className="grid gap-2"
+                    >
                       <div className="h-[150px] w-full cursor-pointer rounded-xl hover:bg-gray-300 bg-gray-200"></div>
                       <div className="flex items-center justify-between ">
                         <div>
-                          <h2 className="font-bold text-xl"> {idea.title.length > 13
+                          <h2 className="font-bold text-xl">
+                            {" "}
+                            {idea.title.length > 13
                               ? `${idea.title.substring(0, 13)}...`
-                              : idea.title}</h2>
+                              : idea.title}
+                          </h2>
                           <p className="overflow-x-hidden">
                             {idea.description.length > 30
                               ? `${idea.description.substring(0, 30)}...`
@@ -122,9 +134,12 @@ const Ideas = () => {
                       <div className="flex text-sm text-gray-700 items-center justify-between">
                         <div className="flex items-center gap-1">
                           <LucideTarget className="h-5 w-5 text-black" />
-                          <p className="capitalize"> {idea.category.length > 15
+                          <p className="capitalize">
+                            {" "}
+                            {idea.category.length > 15
                               ? `${idea.category.substring(0, 15)}...`
-                              : idea.category}</p>
+                              : idea.category}
+                          </p>
                         </div>
                         <p>{getDateInEnglish(idea.created_at)} </p>
                       </div>
