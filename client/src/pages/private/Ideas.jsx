@@ -3,6 +3,7 @@ import { LayoutGrid, LayoutList, LucideTarget } from "lucide-react";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../axiosConfig";
 import { useAuth } from "../../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 const Ideas = () => {
   const { user } = useAuth();
@@ -103,7 +104,7 @@ const Ideas = () => {
               <div className="my-2">
                 <div className="grid  2xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 md:gap-6 gap-8 items-start">
                   {ideasList.map((idea, index) => (
-                    <div key={index} className="grid gap-2">
+                    <Link to={`/ideas/${idea._id}`} key={index} className="grid gap-2">
                       <div className="h-[150px] w-full cursor-pointer rounded-xl hover:bg-gray-300 bg-gray-200"></div>
                       <div className="flex items-center justify-between ">
                         <div>
@@ -123,7 +124,7 @@ const Ideas = () => {
                         </div>
                         <p>{getDateInEnglish(idea.created_at)} </p>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>
