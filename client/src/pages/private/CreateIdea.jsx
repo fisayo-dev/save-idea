@@ -88,7 +88,7 @@ const CreateIdea = () => {
 
     setCreateLoading(true);
     try {
-      await axiosInstance.post("/ideas", {
+      const response = await axiosInstance.post("/ideas", {
         title,
         description,
         category,
@@ -96,8 +96,10 @@ const CreateIdea = () => {
         problem_to_solve: problemToSolve,
         creator_id: user,
       });
+      const id = response.data.createdIdea._id;
       alert("Idea creation successful");
-      navigate("/ideas");
+      console.log(response.data);
+      navigate(`/ideas/${id}`);
     } catch (error) {
       setCreateError(error);
     } finally {
