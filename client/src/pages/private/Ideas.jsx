@@ -1,7 +1,27 @@
 import { SearchNormal } from "iconsax-react";
 import { LayoutGrid, LayoutList, LucideTarget } from "lucide-react";
+import { useEffect, useState } from "react";
+import axiosInstance from "../../../axiosConfig";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Ideas = () => {
+  const { user } = useAuth();
+  console.log(user);
+  // const [ideasLoading, setIdeasLoading] = useState([]);
+
+  const fetchIdeas = async () => {
+    try {
+      const response = await axiosInstance.get(`/ideas/${user}`);
+      const data = response.data; // No need for `await` here
+      console.log(data);
+    } catch (err) {
+      console.log("Error:", err.message);
+    }
+  };
+  useEffect(() => {
+    fetchIdeas();
+  }, []);
+
   const ideas = [
     {
       title: "Idea 1",
@@ -10,7 +30,7 @@ const Ideas = () => {
       date_created: "12/04/2024",
       img: "12",
       category: "science",
-      status: 'Done',
+      status: "Done",
     },
     {
       title: "Idea 2",
@@ -19,7 +39,7 @@ const Ideas = () => {
       date_created: "12/04/2024",
       img: "12",
       category: "science",
-      status: 'Still in progress',
+      status: "Still in progress",
     },
     {
       title: "Idea 3",
@@ -28,7 +48,7 @@ const Ideas = () => {
       date_created: "12/04/2024",
       img: "12",
       category: "science",
-      status: 'Almost done',
+      status: "Almost done",
     },
     {
       title: "Idea 4",
@@ -37,7 +57,7 @@ const Ideas = () => {
       date_created: "12/04/2024",
       img: "12",
       category: "science",
-      status: 'unfinished',
+      status: "unfinished",
     },
   ];
   return (
