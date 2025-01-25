@@ -25,8 +25,9 @@ const Ideas = () => {
     } catch (err) {
       setIdeasList([]);
       setError(err.message || "An unknown error occurred");
+    } finally {
+      setFetchLoading(false);
     }
-    setFetchLoading(false);
   };
 
   const getDateInEnglish = (date) => {
