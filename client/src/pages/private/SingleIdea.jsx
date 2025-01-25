@@ -14,6 +14,13 @@ const SingleIdea = () => {
   const [deleteLoading, setDeleteLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Edit states
+  const [editIdeaMode, setEditIdeaMode] = useState(true);
+
+  const editableStyles = editIdeaMode
+    ? "px-4 py-2 border-[.101rem] border-gray-600 rounded-2xl"
+    : "";
+
   const getIdea = async () => {
     try {
       const response = await axiosInstance.get(`/ideas/${id}/creator/${user}`);
@@ -80,25 +87,44 @@ const SingleIdea = () => {
             <div className="grid gap-6 p-2">
               <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
                 <label className="text-sm ">Title</label>
-                <h2 className="text-3xl font-bold">{idea.title}</h2>
+                <h2
+                  contentEditable={editIdeaMode}
+                  className={`text-3xl font-bold ${editableStyles}`}
+                >
+                  {idea.title}
+                </h2>
               </div>
               <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
                 <label className="text-sm ">Description</label>
-                <p>{idea.description}</p>
+                <p contentEditable={editIdeaMode} className={editableStyles}>{idea.description}</p>
               </div>
               <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
                 <label className="text-sm ">Category</label>
-                <p>{idea.category}</p>
+                <p contentEditable={editIdeaMode} className={editableStyles}>
+                  {idea.category}
+                </p>
               </div>
               <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
                 <label className="text-sm ">Problem to solve</label>
-                <p>{idea.problem_to_solve}</p>
+                <p contentEditable={editIdeaMode} className={editableStyles}>
+                  {idea.problem_to_solve}
+                </p>
               </div>
               <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
                 <label className="text-sm ">Inspirational source</label>
-                <p>{idea.inspiration_source}</p>
+                <p contentEditable={editIdeaMode} className={editableStyles}>
+                  {idea.inspiration_source}
+                </p>
               </div>
             </div>
+            {editIdeaMode && (
+              <div className="mx-auto">
+                <Button className="flex items-center gap-2">
+                  <Pencil />
+                  <p>Save changes</p>
+                </Button>
+              </div>
+            )}
           </div>
         )}
       </div>
