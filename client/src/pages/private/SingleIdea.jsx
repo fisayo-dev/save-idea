@@ -78,23 +78,23 @@ const SingleIdea = () => {
               </div>
             </div>
             <div className="grid gap-6 p-2">
-              <div className="grid gap-3 p-4 rounded-xl bg-gray-200">
+              <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
                 <label className="text-sm ">Title</label>
                 <h2 className="text-3xl font-bold">{idea.title}</h2>
               </div>
-              <div className="grid gap-3 p-4 rounded-xl bg-gray-200">
+              <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
                 <label className="text-sm ">Description</label>
                 <p>{idea.description}</p>
               </div>
-              <div className="grid gap-3 p-4 rounded-xl bg-gray-200">
+              <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
                 <label className="text-sm ">Category</label>
                 <p>{idea.category}</p>
               </div>
-              <div className="grid gap-3 p-4 rounded-xl bg-gray-200">
+              <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
                 <label className="text-sm ">Problem to solve</label>
                 <p>{idea.problem_to_solve}</p>
               </div>
-              <div className="grid gap-3 p-4 rounded-xl bg-gray-200">
+              <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
                 <label className="text-sm ">Inspirational source</label>
                 <p>{idea.inspiration_source}</p>
               </div>

@@ -18,7 +18,7 @@ const Ideas = () => {
   const fetchIdeas = async () => {
     setFetchLoading(true);
     try {
-      const response = await axiosInstance.get(`/ideas/${uer}`);
+      const response = await axiosInstance.get(`/ideas/${user}`);
       const data = response.data;
       setIdeasList(data.ideas);
       setError(null);
