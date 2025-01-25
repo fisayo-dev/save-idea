@@ -1,4 +1,4 @@
-import { SearchNormal, Star1 } from "iconsax-react";
+import { Refresh, SearchNormal, Star1 } from "iconsax-react";
 import { LayoutGrid, LayoutList, LucideTarget } from "lucide-react";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../axiosConfig";
@@ -6,6 +6,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
 import empty_ideas from "../../assets/vectors/empty_ideas.svg";
+import error_fetching_ideas from "../../assets/vectors/error_fetching_ideas.svg";
+import { Button } from "../../components/ui/button";
 
 const Ideas = () => {
   const { user } = useAuth();
@@ -14,7 +16,7 @@ const Ideas = () => {
 
   const fetchIdeas = async () => {
     try {
-      const response = await axiosInstance.get(`/ideas/${user}`);
+      const response = await axiosInstance.get(`/ideas/${ser}`);
       const data = response.data;
       setIdeasList(data.ideas);
       setError(null);
@@ -72,8 +74,23 @@ const Ideas = () => {
 
           {/* Display error if any */}
           {error && (
-            <div className="text-center text-red-600">
-              <p>An errror occurred when trying to fetch ideas</p>
+            <div className="grid p-2  min-h-[350px] bg-gray-50 w-full place-items-center rounded-2xl">
+              <div className="flex flex-col items-center gap-5 ">
+                <img
+                  src={error_fetching_ideas}
+                  draggable={false}
+                  className="mx-auto w-56"
+                />
+                <p className="text-center">
+                  An error occurred when trying to fetch ideas
+                </p>
+                <div className="mx-auto" onClick={fetchIdeas}>
+                  <Button className="flex items-center gap-2">
+                    <Refresh className="h-6 w-6" />
+                    <p>Re-fetch ideas</p>
+                  </Button>
+                </div>
+              </div>
             </div>
           )}
 
