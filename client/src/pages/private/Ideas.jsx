@@ -13,10 +13,12 @@ const Ideas = () => {
   const { user } = useAuth();
   const [ideasList, setIdeasList] = useState([]);
   const [error, setError] = useState(null);
+  const [fetchLoading, setFetchLoading] = useState(false);
 
   const fetchIdeas = async () => {
+    setFetchLoading(true);
     try {
-      const response = await axiosInstance.get(`/ideas/${ser}`);
+      const response = await axiosInstance.get(`/ideas/${uer}`);
       const data = response.data;
       setIdeasList(data.ideas);
       setError(null);
@@ -24,6 +26,7 @@ const Ideas = () => {
       setIdeasList([]);
       setError(err.message || "An unknown error occurred");
     }
+    setFetchLoading(false);
   };
 
   const getDateInEnglish = (date) => {
@@ -87,7 +90,7 @@ const Ideas = () => {
                 <div className="mx-auto" onClick={fetchIdeas}>
                   <Button className="flex items-center gap-2">
                     <Refresh className="h-6 w-6" />
-                    <p>Re-fetch ideas</p>
+                    <p>Re-fetch</p>
                   </Button>
                 </div>
               </div>
