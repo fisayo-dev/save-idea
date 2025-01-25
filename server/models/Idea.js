@@ -8,7 +8,8 @@ const ideaSchema = new mongoose.Schema({
     category: { type: 'String', required: true },
     creator_id: { type: mongoose.Schema.Types.ObjectId ,ref : 'User' },
     created_at: { type: 'Date', default: Date.now },
-    updated_at: { type: 'Date', default: Date.now }
+    updated_at: { type: 'Date', default: Date.now },
+    starred: { type: Boolean, default: false }
 })
 
 const ideaModel = mongoose.model('Idea', ideaSchema)
