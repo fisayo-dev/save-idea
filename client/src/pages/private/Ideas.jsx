@@ -73,7 +73,7 @@ const Ideas = () => {
           {/* Display error if any */}
           {error && (
             <div className="text-center text-red-600">
-              <p>{error}</p>
+              <p>An errror occurred when trying to fetch ideas</p>
             </div>
           )}
 
