@@ -21,6 +21,7 @@ const Ideas = () => {
       const response = await axiosInstance.get(`/ideas/${user}`);
       const data = response.data;
       setIdeasList(data.ideas);
+      console.log(data.ideas);
       setError(null);
     } catch (err) {
       setIdeasList([]);
@@ -156,7 +157,9 @@ const Ideas = () => {
                               : idea.description}
                           </p>
                         </div>
-                        <Star1 />
+                        <div className={idea.starred  && 'bg-yellow'}>
+                         <Star1 /> 
+                        </div>
                       </div>
                       <div className="flex text-sm text-gray-700 items-center justify-between">
                         <div className="flex items-center gap-1">
