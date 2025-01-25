@@ -1,9 +1,11 @@
-import { Note, SearchNormal, Star, Star1 } from "iconsax-react";
+import { SearchNormal, Star1 } from "iconsax-react";
 import { LayoutGrid, LayoutList, LucideTarget } from "lucide-react";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../axiosConfig";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
+
+import empty_ideas from "../../assets/vectors/empty_ideas.svg";
 
 const Ideas = () => {
   const { user } = useAuth();
@@ -77,9 +79,13 @@ const Ideas = () => {
 
           {/* Display message when no ideas are available */}
           {!error && ideasList.length === 0 && (
-            <div className="grid h-[300px] p-2 bg-gray-200 w-full place-items-center rounded-2xl">
-              <div className="flex flex-col items-center ">
-                <Note className="md:h-52 md:w-52 h-36 w-36"/>
+            <div className="grid p-2  min-h-[350px] bg-gray-50 w-full place-items-center rounded-2xl">
+              <div className="flex flex-col items-center gap-5 ">
+                <img
+                  src={empty_ideas}
+                  draggable={false}
+                  className="mx-auto w-52"
+                />
                 <p className="text-center">You don't have any ideas yet</p>
               </div>
             </div>
