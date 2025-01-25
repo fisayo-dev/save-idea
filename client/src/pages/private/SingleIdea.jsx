@@ -4,7 +4,7 @@ import axiosInstance from "../../../axiosConfig";
 import { useAuth } from "../../contexts/AuthContext";
 import { Button } from "../../components/ui/button";
 import { Back, Trash } from "iconsax-react";
-import { Pencil } from "lucide-react";
+import { Pencil, XCircle } from "lucide-react";
 
 const SingleIdea = () => {
   const { id } = useParams();
@@ -15,7 +15,7 @@ const SingleIdea = () => {
   const navigate = useNavigate();
 
   // Edit states
-  const [editIdeaMode, setEditIdeaMode] = useState(true);
+  const [editIdeaMode, setEditIdeaMode] = useState(false);
 
   const editableStyles = editIdeaMode
     ? "px-4 py-2 border-[.101rem] border-gray-600 rounded-2xl"
@@ -73,9 +73,21 @@ const SingleIdea = () => {
                 </div>
               )}
               <div className="flex items-center justify-between gap-2">
-                <div className="bg-gray-200 cursor-pointer hover:bg-gray-300 rounded-full p-3">
-                  <Pencil />
-                </div>
+                {!editIdeaMode ? (
+                  <div
+                    className="bg-gray-200 cursor-pointer hover:bg-gray-300 rounded-full p-3"
+                    onClick={() => setEditIdeaMode(true)}
+                  >
+                    <Pencil />
+                  </div>
+                ) : (
+                  <div
+                    className="bg-gray-200 cursor-pointer hover:bg-gray-300 rounded-full p-3"
+                    onClick={() => setEditIdeaMode(false)}
+                  >
+                    <XCircle />
+                  </div>
+                )}
                 <div
                   className="bg-gray-200 cursor-pointer hover:bg-gray-300 rounded-full p-3"
                   onClick={deleteIdea}
@@ -96,7 +108,9 @@ const SingleIdea = () => {
               </div>
               <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
                 <label className="text-sm ">Description</label>
-                <p contentEditable={editIdeaMode} className={editableStyles}>{idea.description}</p>
+                <p contentEditable={editIdeaMode} className={editableStyles}>
+                  {idea.description}
+                </p>
               </div>
               <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
                 <label className="text-sm ">Category</label>
