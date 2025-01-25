@@ -4,7 +4,7 @@ import axiosInstance from "../../../axiosConfig";
 import { useAuth } from "../../contexts/AuthContext";
 import { Button } from "../../components/ui/button";
 import { Back, Trash } from "iconsax-react";
-import { Pencil, XCircle } from "lucide-react";
+import { Loader2Icon, Pencil, XCircle } from "lucide-react";
 
 const SingleIdea = () => {
   const { id } = useParams();
@@ -15,7 +15,8 @@ const SingleIdea = () => {
   const navigate = useNavigate();
 
   // Edit states
-  const [editIdeaMode, setEditIdeaMode] = useState(false);
+  const [editIdeaMode, setEditIdeaMode] = useState(true);
+  const [editLoading, setEditLoading] = useState(true);
 
   const editableStyles = editIdeaMode
     ? "px-4 py-2 border-[.101rem] border-gray-600 rounded-2xl"
@@ -33,6 +34,16 @@ const SingleIdea = () => {
     }
   };
 
+  const editIdea = async (e) => {
+    e.preventDefault();
+    setEditLoading(true);
+    try {
+    } catch (err) {
+      console.log(err.message);
+    } finally {
+      setEditLoading(false);
+    }
+  };
   const deleteIdea = async (e) => {
     e.preventDefault();
     setDeleteLoading(true);
@@ -133,9 +144,9 @@ const SingleIdea = () => {
             </div>
             {editIdeaMode && (
               <div className="mx-auto">
-                <Button className="flex items-center gap-2">
-                  <Pencil />
-                  <p>Save changes</p>
+                <Button disabled={editLoading} className="flex items-center gap-2">
+                  {editLoading ? <Loader2Icon className="animate-spin" /> : <Pencil />}
+                  <p>{editLoading ? 'Saving changes': 'Save changes'}</p>
                 </Button>
               </div>
             )}
