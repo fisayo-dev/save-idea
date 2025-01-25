@@ -187,10 +187,15 @@ const SingleIdea = () => {
                   <textarea
                     value={problemToSolve}
                     onChange={(e) => setProblemToSolve(e.target.value)}
-                    className="px-4 py-2 border-[.101rem] border-gray-600 rounded-2xl"
+                    className="min-h-[350px] px-4 py-2 border-[.101rem] border-gray-600 rounded-2xl"
                   />
                 ) : (
-                  <p>{problemToSolve}</p>
+                  <textarea
+                    readOnly
+                    className="min-h-[350px] px-4 py-2 rounded-2xl"
+                  >
+                    {problemToSolve}
+                  </textarea>
                 )}
               </div>
 
@@ -201,10 +206,15 @@ const SingleIdea = () => {
                   <textarea
                     value={inspirationSource}
                     onChange={(e) => setInspirationSource(e.target.value)}
-                    className="px-4 py-2 border-[.101rem] border-gray-600 rounded-2xl"
+                    className="min-h-[350px] px-4 py-2 border-[.101rem] border-gray-600 rounded-2xl"
                   />
                 ) : (
-                  <p>{inspirationSource}</p>
+                  <textarea
+                    readOnly
+                    className="min-h-[350px] px-4 py-2 rounded-2xl"
+                  >
+                    {inspirationSource}
+                  </textarea>
                 )}
               </div>
             </div>
