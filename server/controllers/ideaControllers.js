@@ -46,6 +46,17 @@ const getIdeas = async (req, res) => {
         
     }
 }
+const getStarredIdeas = async (req, res) => { 
+    const { creator_id } = req.params;
+    try {
+        const ideas = await Idea.find({ creator_id }).getQuery({ starred: true }).sort({ updated_at: -1 })
+        
+        if(!ideas) return res.status(404).json({ message: "Oops, this user doesn't have an idea" })
+        res.status(200).json({ message: 'Ideas fetched successfully', ideas })
+    } catch (err) {
+        
+    }
+}
 const getSingleIdea = async (req, res) => { 
     const { id, creator_id } = req.params;
     
@@ -80,4 +91,4 @@ const updateIdea = async (req, res) => {
     }
 }
 
-export { createIdea, deleteIdea, getIdeas, getSingleIdea, updateIdea }
+export { createIdea, deleteIdea, getIdeas, getSingleIdea, updateIdea, getStarredIdeas }
