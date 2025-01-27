@@ -14,9 +14,10 @@ const productionURI = process.env.PRODUCTION_URI
 const app = express();
 const corsOptions = {
     origin: process.env.NODE_ENV === 'production' 
-      ? 'https://saveideaapp.vercel.app' 
+      ? 'https://saveideaapp.vercel.app/' 
       : 'http://localhost:5173', 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true, 
 };
   
@@ -32,7 +33,7 @@ app.use('/api/ideas/', ideaRoutes)
 
 app.get('/api/', (req, res) => {
     res.status(200).json({ message: 'Backend route working' });
-});
+  });
   
 const MONGO_URI = process.env.NODE_ENV == 'production' ? productionURI: localURI
 
