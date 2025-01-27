@@ -41,8 +41,8 @@ const Ideas = () => {
         }
       );
       const data = response.data;
-      console.log(data);
-      fetchIdeas();
+      console.log(data)
+      setIdeasList(data.ideas)
     } catch (err) {
       console.log(err.message);
     }

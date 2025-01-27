@@ -95,17 +95,25 @@ const createStar = async (req, res) => {
     const { creator_id } = req.body;
     const { id } = req.params;
     try {
-        const ideaToBeStarred = await Idea.findOne({ creator_id, _id: id })
-        if (!ideaToBeStarred) return res.status(404).json({ message: 'This idea does not exist' })
         
+        const ideaToBeStarred = await Idea.findOne({ creator_id, _id: id })
+        if (!ideaToBeStarred) return res.status(404).json({ message: 'This idea does not exist' })   
+        // Ideas
+        let ideas = []
+        // Fetching idea to be updated
         const idea = await Idea.findByIdAndUpdate(id) 
+        // Getting its starred status
         const standardIdea = idea.starred
+        // Return idea update for starred idea
         if (standardIdea) {
             await Idea.findByIdAndUpdate(id, { starred: false }, { new: true }) 
-            res.status(200).json({ message: 'Idea unsuccessfully starred' })
+            ideas = await Idea.find({ creator_id }).sort({ updated_at: -1 })
+            res.status(200).json({ message: 'Idea unsuccessfully starred', ideas })
+            // Return idea update for unstarred idea
         } else {
             await Idea.findByIdAndUpdate(id, { starred: true }, { new: true }) 
-            res.status(200).json({ message: 'Idea starred successfully' })
+            ideas = await Idea.find({ creator_id }).sort({ updated_at: -1 })
+            res.status(200).json({ message: 'Idea starred successfully', ideas })
         }
     } catch (err) {
         res.status(500).json({ message: 'An error occurred while trying to star your idea', err })
