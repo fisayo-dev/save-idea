@@ -10,9 +10,10 @@ const IdeaCard = ({
   createDate,
   category,
   starredStatus,
+  starIdeaFunc,
 }) => {
   return (
-    <Link to={`/ideas/${id}`} className="grid gap-2">
+    <Link  className="grid gap-2">
       <div className="h-[150px] w-full cursor-pointer rounded-xl hover:bg-gray-300 bg-gray-200"></div>
       <div className="flex items-center justify-between ">
         <div>
@@ -26,7 +27,7 @@ const IdeaCard = ({
               : description}
           </p>
         </div>
-        <div className={starredStatus && "bg-yellow"}>
+        <div onClick={starIdeaFunc} className={starredStatus && "bg-yellow"}>
           <Star1 />
         </div>
       </div>

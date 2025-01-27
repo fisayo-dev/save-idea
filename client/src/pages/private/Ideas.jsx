@@ -31,12 +31,18 @@ const Ideas = () => {
     }
   };
 
-  const starIdeas = async ({star_id}) => {
+  const starIdea = async (star_id) => {
+    console.log(star_id);
     try {
-      const response = await axiosInstance.get(`/ideas/create_star/${star_id}`);
+      const response = await axiosInstance.post(
+        `/ideas/create_star/${star_id}`,
+        {
+          creator_id: user,
+        }
+      );
       const data = response.data;
       console.log(data);
-      fetchIdeas()
+      fetchIdeas();
     } catch (err) {
       console.log(err.message);
     }
@@ -124,6 +130,7 @@ const Ideas = () => {
                         <IdeaCard
                           key={index}
                           id={idea._id}
+                          starIdeaFunc={() => starIdea(idea._id)}
                           category={idea.category}
                           createDate={idea.created_at}
                           title={idea.title}
