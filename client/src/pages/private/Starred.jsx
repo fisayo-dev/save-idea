@@ -18,7 +18,7 @@ const Ideas = () => {
   const fetchIdeas = async () => {
     setFetchLoading(true);
     try {
-      const response = await axiosInstance.get(`/ideas/${user}`);
+      const response = await axiosInstance.get(`/ideas/${user}/starred`);
       const data = response.data;
       setIdeasList(data.ideas);
       console.log(data.ideas);
@@ -39,7 +39,9 @@ const Ideas = () => {
     <div className="2xl:container mx-auto">
       <div className="py-6">
         <div className="grid gap-4">
-          <h2 className="text-4xl font-bold text-center">Your Ideas</h2>
+          <h2 className="text-4xl font-bold text-center">
+            🌟 Your Starred Ideas
+          </h2>
 
           {fetchLoading ? (
             <div className="grid p-2  min-h-[350px] bg-gray-50 w-full place-items-center rounded-2xl">
@@ -62,7 +64,7 @@ const Ideas = () => {
                     <p className="text-center">
                       An error occurred when trying to fetch ideas
                     </p>
-                    <div className="mx-auto" onClick={fetchIdeas}>
+                    <div className="mx-auto" onClick={fetchIdeas()}>
                       <Button className="flex items-center gap-2">
                         <Refresh className="h-6 w-6" />
                         <p>Re-fetch</p>
@@ -81,7 +83,9 @@ const Ideas = () => {
                       draggable={false}
                       className="mx-auto w-52"
                     />
-                    <p className="text-center">You don't have any ideas yet</p>
+                    <p className="text-center">
+                      You haven't starred any idea yet.
+                    </p>
                   </div>
                 </div>
               )}
