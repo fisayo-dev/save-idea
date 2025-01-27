@@ -105,7 +105,7 @@ const Ideas = () => {
                       key={index}
                       id={idea._id}
                       category={idea.category}
-                      createDate={idea.created_date}
+                      createDate={idea.created_at}
                       title={idea.title}
                       description={idea.description}
                       starredStatus={idea.starred}
