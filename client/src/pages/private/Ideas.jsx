@@ -1,13 +1,13 @@
-import { Refresh, SearchNormal, Star1 } from "iconsax-react";
-import { LayoutGrid, LayoutList, LucideTarget } from "lucide-react";
+import { Refresh, SearchNormal } from "iconsax-react";
+import { LayoutGrid, LayoutList } from "lucide-react";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../axiosConfig";
 import { useAuth } from "../../contexts/AuthContext";
-import { Link } from "react-router-dom";
 
 import empty_ideas from "../../assets/vectors/empty_ideas.svg";
 import error_fetching_ideas from "../../assets/vectors/error_fetching_ideas.svg";
 import { Button } from "../../components/ui/button";
+import { IdeaCard } from "../../components";
 
 const Ideas = () => {
   const { user } = useAuth();
@@ -29,42 +29,6 @@ const Ideas = () => {
     } finally {
       setFetchLoading(false);
     }
-  };
-
-  const getDateInEnglish = (date) => {
-    const day = new Date(date).getDate();
-    const year = new Date(date).getFullYear();
-
-    if (new Date().getDate() - day === 1) return "Yesterday";
-    if (new Date().getDate() - day === 2) return "2 days ago";
-    if (new Date().getDate() - day === 3) return "3 days ago";
-    if (new Date().getDate() - day === 4) return "4 days ago";
-    if (new Date().getDate() - day === 5) return "5 days ago";
-    if (new Date().getDate() - day === 6) return "6 days ago";
-    if (new Date().getDate() - day === 0) return "Today";
-    if (new Date().getDate() - day >= 7) return "A week ago";
-    if (new Date().getDate() - day >= 14) return "2 weeks ago";
-    if (new Date().getDate() - day >= 21) return "3 weeks ago";
-    if (new Date().getDate() - day >= 28) return "a month ago";
-
-    const monthInEnglish = [
-      "Jan",
-      "Feb",
-      "March",
-      "April",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sept",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const monthIndex = new Date(date).getMonth();
-
-    const month = monthInEnglish[monthIndex];
-
-    return `${day} ${month}, ${year}`;
   };
 
   useEffect(() => {
@@ -137,43 +101,15 @@ const Ideas = () => {
               <div className="my-2">
                 <div className="grid  2xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 md:gap-6 gap-8 items-start">
                   {ideasList.map((idea, index) => (
-                    <Link
-                      to={`/ideas/${idea._id}`}
+                    <IdeaCard
                       key={index}
-                      className="grid gap-2"
-                    >
-                      <div className="h-[150px] w-full cursor-pointer rounded-xl hover:bg-gray-300 bg-gray-200"></div>
-                      <div className="flex items-center justify-between ">
-                        <div>
-                          <h2 className="font-bold text-xl">
-                            {" "}
-                            {idea.title.length > 13
-                              ? `${idea.title.substring(0, 13)}...`
-                              : idea.title}
-                          </h2>
-                          <p className="overflow-x-hidden">
-                            {idea.description.length > 30
-                              ? `${idea.description.substring(0, 30)}...`
-                              : idea.description}
-                          </p>
-                        </div>
-                        <div className={idea.starred  && 'bg-yellow'}>
-                         <Star1 /> 
-                        </div>
-                      </div>
-                      <div className="flex text-sm text-gray-700 items-center justify-between">
-                        <div className="flex items-center gap-1">
-                          <LucideTarget className="h-5 w-5 text-black" />
-                          <p className="capitalize">
-                            {" "}
-                            {idea.category.length > 15
-                              ? `${idea.category.substring(0, 15)}...`
-                              : idea.category}
-                          </p>
-                        </div>
-                        <p>{getDateInEnglish(idea.created_at)} </p>
-                      </div>
-                    </Link>
+                      id={idea._id}
+                      category={idea.category}
+                      createDate={idea.created_date}
+                      title={idea.title}
+                      description={idea.description}
+                      starredStatus={idea.starred}
+                    />
                   ))}
                 </div>
               </div>
