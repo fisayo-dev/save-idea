@@ -95,7 +95,6 @@ const createStar = async (req, res) => {
     const { creator_id } = req.body;
     const { id } = req.params;
     try {
-        
         const ideaToBeStarred = await Idea.findOne({ creator_id, _id: id })
         if (!ideaToBeStarred) return res.status(404).json({ message: 'This idea does not exist' })   
         // Ideas
