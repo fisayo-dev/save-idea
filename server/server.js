@@ -30,6 +30,10 @@ app.use(express.json())
 app.use('/api/users/', userRoutes)
 app.use('/api/ideas/', ideaRoutes)
 
+app.get('/api/', (req, res) => {
+    res.status(200).json({ message: 'Backend route working' });
+});
+  
 const MONGO_URI = process.env.NODE_ENV == 'production' ? productionURI: localURI
 
 app.listen(PORT, () => {
