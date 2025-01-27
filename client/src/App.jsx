@@ -12,6 +12,7 @@ import {
   Landing,
   Profile,
   SingleIdea,
+  Starred,
 } from "./pages";
 import AppOutlet from "./outlets/AppOutlet";
 import PrivateRoutes from "./utils/PrivateRoutes";
@@ -31,6 +32,7 @@ function App() {
             <Route path="/ideas/:id" element={<SingleIdea />} />
             <Route path="/create" element={<CreateIdea />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/starred" element={<Starred />} />
           </Route>
         </Route>
       </>
