@@ -4,7 +4,7 @@ import axios from 'axios';
 const backendurl = process.env.NODE_ENV === "production" ? 'https://save-idea.onrender.com/api/' : '/api';
 const axiosInstance = axios.create({
   baseURL: backendurl,
-  timeout: 10000,
+  // timeout: 10000,
   headers: {
       'Content-Type': 'application/json', 
       'Authorization': `Bearer ${localStorage.getItem('TOKEN')}` // Optional: Add
