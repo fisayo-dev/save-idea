@@ -14,7 +14,7 @@ const productionURI = process.env.PRODUCTION_URI
 const app = express();
 const corsOptions = {
     origin: process.env.NODE_ENV === 'production' 
-      ? 'https://saveidea.netlify.app' 
+      ? 'https://saveideaapp.vercel.app' 
       : 'http://localhost:5173', 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true, 
