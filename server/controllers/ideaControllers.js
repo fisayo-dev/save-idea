@@ -91,4 +91,18 @@ const updateIdea = async (req, res) => {
     }
 }
 
-export { createIdea, deleteIdea, getIdeas, getSingleIdea, updateIdea, getStarredIdeas }
+const createStar = async (req, res) => {
+    const { creator_id } = req.body;
+    const { id } = req.params;
+    try {
+        const ideaToBeStarred = await Idea.findOne({ creator_id, _id: id })
+        if (!ideaToBeStarred) return res.status(404).json({ message: 'This idea does not exist' })
+            await Idea.findByIdAndUpdate(id, { starred: true }, { new: true })
+        res.status(200).json({ message: 'Idea starred successfully' })
+    } catch (err) {
+        res.status(500).json({ message: 'An error occurred while trying to star your idea', err })
+    }
+    
+}
+
+export { createIdea, deleteIdea, getIdeas, getSingleIdea, updateIdea, getStarredIdeas,createStar }

@@ -31,6 +31,17 @@ const Ideas = () => {
     }
   };
 
+  const starIdeas = async ({star_id}) => {
+    try {
+      const response = await axiosInstance.get(`/ideas/create_star/${star_id}`);
+      const data = response.data;
+      console.log(data);
+      fetchIdeas()
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   useEffect(() => {
     fetchIdeas();
   }, []);
