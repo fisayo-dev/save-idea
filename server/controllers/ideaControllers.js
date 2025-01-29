@@ -127,7 +127,26 @@ const deleteToBin = async (req, res) => {
     res.status(200).json({ message: 'Idea sent to bin successfully', deleteAt: dateToBeDeleted });
 };
 
+const restoreFromBin = async (req, res) => {
+    const { id } = req.params;
+    const { creator_id } = req.body;
 
+    // Find the idea
+    const ideaToBeRestored = await Idea.findOne({ creator_id, _id: id });
+    if (!ideaToBeRestored) {
+        return res.status(404).json({ message: 'This idea does not exist' });
+    }
+
+    // Check if the idea is in the bin and the deletion date has not passed
+    if (!ideaToBeRestored.deleted_at || new Date(ideaToBeRestored.deleted_at) < new Date()) {
+        return res.status(400).json({ message: 'This idea cannot be restored because it has already been permanently deleted or is not in the bin.' });
+    }
+
+    // Restore the idea by setting `deleted_at` to null
+    await Idea.findByIdAndUpdate(id, { deleted_at: null }, { new: true });
+
+    res.status(200).json({ message: 'You have successfully restored the idea from the bin' });
+};
 
 const createStar = async (req, res) => {
     const { creator_id } = req.body;
@@ -158,4 +177,4 @@ const createStar = async (req, res) => {
     
 }
 
-export { createIdea, deleteIdea, getIdeas, getSingleIdea, updateIdea, getStarredIdeas,createStar, deleteToBin }
+export { createIdea, deleteIdea, getIdeas, getSingleIdea, updateIdea, getStarredIdeas,createStar, deleteToBin, restoreFromBin}

@@ -81,6 +81,15 @@ const SingleIdea = () => {
     }
   };
 
+  const restoreFromBin = async (e) => {
+    e.preventDefault();
+    try {
+      await axiosInstance.put(`/ideas/${id}/restore`, { creator_id: user });
+      navigate("/ideas");
+    } catch (err) {
+      setError(err.message || "Failed to restore idea from bin.");
+    }
+  };
   /** Permanently delete the idea */
   const deleteIdea = async (e) => {
     e.preventDefault();
@@ -90,7 +99,7 @@ const SingleIdea = () => {
       await axiosInstance.delete(`/ideas/${id}`, {
         data: { creator_id: user },
       });
-      navigate("/bin"); 
+      navigate("/bin");
     } catch (err) {
       setError(err.message || "Failed to delete the idea.");
     } finally {
@@ -156,9 +165,11 @@ const SingleIdea = () => {
                       disabled={deleteLoading}
                     >
                       <Trash className="h-8 w-8" />
-                      <p>{deleteLoading ? "Deleting..." : "Delete Permanently"}</p>
+                      <p>
+                        {deleteLoading ? "Deleting..." : "Delete Permanently"}
+                      </p>
                     </Button>
-                    <Button className="flex items-center gap-2">
+                    <Button onClick={restoreFromBin} className="flex items-center gap-2">
                       <Refresh className="h-8 w-8" />
                       <p>Restore</p>
                     </Button>
