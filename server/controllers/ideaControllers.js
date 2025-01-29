@@ -91,6 +91,27 @@ const updateIdea = async (req, res) => {
     }
 }
 
+const deleteToBin = async (req, res) => {
+    const { id, creator_id } = req.params;
+
+    // Find the idea
+    const ideaToBeDeleted = await Idea.findOne({ creator_id, _id: id });
+    if (!ideaToBeDeleted) {
+        return res.status(404).json({ message: 'This idea does not exist' });
+    }
+
+    // Correct way to set a deletion date (30 days from now)
+    const dateToBeDeleted = new Date();
+    dateToBeDeleted.setDate(dateToBeDeleted.getDate() + 30);
+
+    // Update the idea with the deletion date
+    await Idea.findByIdAndUpdate(id, { deleted_at: dateToBeDeleted }, { new: true });
+
+    res.status(200).json({ message: 'Idea sent to bin successfully', deleteAt: dateToBeDeleted });
+};
+
+
+
 const createStar = async (req, res) => {
     const { creator_id } = req.body;
     const { id } = req.params;
@@ -120,4 +141,4 @@ const createStar = async (req, res) => {
     
 }
 
-export { createIdea, deleteIdea, getIdeas, getSingleIdea, updateIdea, getStarredIdeas,createStar }
+export { createIdea, deleteIdea, getIdeas, getSingleIdea, updateIdea, getStarredIdeas,createStar, deleteToBin }

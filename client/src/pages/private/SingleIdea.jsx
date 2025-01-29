@@ -87,6 +87,16 @@ const SingleIdea = () => {
     }
   };
 
+  const deleteToBin = async (e) => {
+    e.preventDefault()
+    try {
+      await axiosInstance.put(`/ideas/${id}/creator/${user}`)
+      // navigate('/ideas')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   // Fetch the idea when the component mounts
   useEffect(() => {
     getIdea();
@@ -129,7 +139,7 @@ const SingleIdea = () => {
                 )}
                 <div
                   className="bg-gray-200 cursor-pointer hover:bg-gray-300 rounded-full p-3"
-                  onClick={deleteIdea}
+                  onClick={deleteToBin}
                 >
                   <Trash />
                 </div>
