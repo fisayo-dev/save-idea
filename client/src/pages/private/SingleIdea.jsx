@@ -91,7 +91,7 @@ const SingleIdea = () => {
     e.preventDefault()
     try {
       await axiosInstance.put(`/ideas/${id}/creator/${user}`)
-      // navigate('/ideas')
+      navigate('/bin')
     } catch (err) {
       console.log(err)
     }
