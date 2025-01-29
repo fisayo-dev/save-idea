@@ -148,7 +148,7 @@ const CreateIdea = () => {
             {/* Category Field */}
             <div className="grid gap-3">
               <label>Category</label>
-              <Textarea
+              <Input
                 type="text"
                 placeholder="What category does your idea belong to?"
                 onChange={(e) => setCategory(e.target.value)}
