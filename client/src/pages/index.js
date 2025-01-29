@@ -10,6 +10,7 @@ import Profile from "./private/Profile";
 import CreateIdea from "./private/CreateIdea";
 import SingleIdea from "./private/SingleIdea";
 import Starred from "./private/Starred";
+import Bin from "./private/Bin";
 
-export { Landing, Login, Signup, Ideas, PageNotFound, Profile, CreateIdea, SingleIdea, Starred }
+export { Landing, Login, Signup, Ideas, PageNotFound, Profile, CreateIdea, SingleIdea, Starred, Bin }
 
