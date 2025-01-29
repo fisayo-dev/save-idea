@@ -36,16 +36,32 @@ const deleteIdea = async (req, res) => {
       return res.status(500).json({ message: 'An error occurred while trying to delete the idea' });
     }
   };
-const getIdeas = async (req, res) => { 
+  const getIdeas = async (req, res) => {
     const { creator_id } = req.params;
+    const { deleted } = req.query;
+
     try {
-        const ideas = await Idea.find({ creator_id,deleted_at:null }).sort({updated_at: -1})
-        if(!ideas) return res.status(404).json({ message: "Oops, this user doesn't have an idea" })
-        res.status(200).json({ message: 'Ideas fetched successfully', ideas })
+        let ideas = [];
+
+        if (deleted === "true") {
+            // Fetch only deleted ideas
+            ideas = await Idea.find({ creator_id, deleted_at: { $ne: null } }).sort({ updated_at: -1 });
+        } else {
+            // Fetch only active ideas (not deleted)
+            ideas = await Idea.find({ creator_id, deleted_at: null }).sort({ updated_at: -1 });
+        }
+
+        if (ideas.length === 0) {
+            return res.status(404).json({ message: "Oops, this user doesn't have any ideas" });
+        }
+
+        res.status(200).json({ message: 'Ideas fetched successfully', ideas });
     } catch (err) {
-        
+        console.error(err); // Log error for debugging
+        res.status(500).json({ message: "Something went wrong", error: err.message });
     }
-}
+};
+
 const getStarredIdeas = async (req, res) => { 
     const { creator_id } = req.params;
     try {
