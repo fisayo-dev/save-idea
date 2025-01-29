@@ -90,7 +90,7 @@ const SingleIdea = () => {
       await axiosInstance.delete(`/ideas/${id}`, {
         data: { creator_id: user },
       });
-      navigate("/ideas");
+      navigate("/bin"); 
     } catch (err) {
       setError(err.message || "Failed to delete the idea.");
     } finally {
