@@ -132,7 +132,9 @@ const Ideas = () => {
                           id={idea._id}
                           starIdeaFunc={() => starIdea(idea._id)}
                           category={idea.category}
+                          type="ideas"
                           createDate={idea.created_at}
+                          deletedDate={idea.deleted_at}
                           title={idea.title}
                           description={idea.description}
                           starredStatus={idea.starred}

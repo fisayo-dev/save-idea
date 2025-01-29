@@ -31,7 +31,6 @@ const Bin = () => {
     }
   };
 
-
   useEffect(() => {
     fetchIdeas();
   }, []);
@@ -82,7 +81,9 @@ const Bin = () => {
                       draggable={false}
                       className="mx-auto w-52"
                     />
-                    <p className="text-center">You don't have any ideas in you bin yet</p>
+                    <p className="text-center">
+                      You don't have any ideas in you bin yet
+                    </p>
                   </div>
                 </div>
               )}
@@ -115,8 +116,10 @@ const Bin = () => {
                           key={index}
                           id={idea._id}
                           starIdeaFunc={null}
+                          type="bin"
                           category={idea.category}
                           createDate={idea.created_at}
+                          deletedDate={idea.deleted_at}
                           title={idea.title}
                           description={idea.description}
                           starredStatus={idea.starred}

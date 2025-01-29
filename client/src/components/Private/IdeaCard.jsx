@@ -11,13 +11,15 @@ const IdeaCard = ({
   category,
   starredStatus,
   starIdeaFunc,
+  deletedDate,
+  type,
 }) => {
   return (
     <div className="grid gap-2">
-        <Link
-          to={`/ideas/${id}`}
-          className="h-[150px] w-full cursor-pointer rounded-xl hover:bg-gray-300 bg-gray-200"
-        ></Link>
+      <Link
+        to={`/ideas/${id}`}
+        className="h-[150px] w-full cursor-pointer rounded-xl hover:bg-gray-300 bg-gray-200"
+      ></Link>
       <div className="flex items-center justify-between ">
         <div>
           <h2 className="font-bold text-xl">
@@ -30,12 +32,14 @@ const IdeaCard = ({
               : description}
           </p>
         </div>
-        <div
-          onClick={starIdeaFunc}
-          className={`cursor-pointer ${starredStatus && "color-yellow"}`}
-        >
-          <Star1 />
-        </div>
+        {type !== "bin" && (
+          <div
+            onClick={starIdeaFunc}
+            className={`cursor-pointer ${starredStatus && "color-yellow"}`}
+          >
+            <Star1 />
+          </div>
+        )}
       </div>
       <div className="flex text-sm text-gray-700 items-center justify-between">
         <div className="flex items-center gap-1">
@@ -47,7 +51,7 @@ const IdeaCard = ({
               : category}
           </p>
         </div>
-        <p>{getDateInEnglish(createDate)} </p>
+        <p>{type == 'bin' ? getDateInEnglish(deletedDate) : getDateInEnglish(createDate)} </p>
       </div>
     </div>
   );
