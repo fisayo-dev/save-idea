@@ -51,9 +51,9 @@ const deleteIdea = async (req, res) => {
             ideas = await Idea.find({ creator_id, deleted_at: null }).sort({ updated_at: -1 });
         }
 
-        if (ideas.length === 0) {
-            return res.status(404).json({ message: "Oops, this user doesn't have any ideas" });
-        }
+        // if (ideas.length === 0) {
+        //     return res.status(304).json({ message: "Oops, this user doesn't have any ideas" });
+        // }
 
         res.status(200).json({ message: 'Ideas fetched successfully', ideas });
     } catch (err) {
@@ -108,7 +108,8 @@ const updateIdea = async (req, res) => {
 }
 
 const deleteToBin = async (req, res) => {
-    const { id, creator_id } = req.params;
+    const { id } = req.params;
+    const { creator_id } = req.body
 
     // Find the idea
     const ideaToBeDeleted = await Idea.findOne({ creator_id, _id: id });
