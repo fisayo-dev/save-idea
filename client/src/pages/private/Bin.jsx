@@ -39,7 +39,7 @@ const Bin = () => {
     <div className="2xl:container mx-auto">
       <div className="py-6">
         <div className="grid gap-4">
-          <h2 className="text-4xl font-bold text-center">Your Ideas</h2>
+          <h2 className="text-4xl font-bold text-center">Your Bins</h2>
 
           {fetchLoading ? (
             <div className="grid p-2  min-h-[350px] bg-gray-50 w-full place-items-center rounded-2xl">
