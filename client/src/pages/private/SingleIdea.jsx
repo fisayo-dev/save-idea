@@ -75,7 +75,7 @@ const SingleIdea = () => {
 
     try {
       await axiosInstance.put(`/ideas/${id}/bin`, { creator_id: user });
-      navigate("/ideas");
+      navigate("/bin");
     } catch (err) {
       setError(err.message || "Failed to move idea to bin.");
     }
