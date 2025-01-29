@@ -155,7 +155,8 @@ const SingleIdea = () => {
                       onClick={deleteIdea}
                       disabled={deleteLoading}
                     >
-                      {deleteLoading ? "Deleting..." : "Delete Permanently"}
+                      <Trash className="h-8 w-8" />
+                      <p>{deleteLoading ? "Deleting..." : "Delete Permanently"}</p>
                     </Button>
                     <Button className="flex items-center gap-2">
                       <Refresh className="h-8 w-8" />
