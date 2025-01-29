@@ -82,7 +82,7 @@ const Bin = () => {
                       className="mx-auto w-52"
                     />
                     <p className="text-center">
-                      You don't have any ideas in you bin yet
+                      You don&apos;t have any ideas in you bin yet
                     </p>
                   </div>
                 </div>
