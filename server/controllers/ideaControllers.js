@@ -144,12 +144,12 @@ const createStar = async (req, res) => {
         // Return idea update for starred idea
         if (standardIdea) {
             await Idea.findByIdAndUpdate(id, { starred: false }, { new: true }) 
-            ideas = await Idea.find({ creator_id }).sort({ updated_at: -1 })
+            ideas = await Idea.find({ creator_id,  deleted_at: null }).sort({ updated_at: -1 })
             res.status(200).json({ message: 'Idea unsuccessfully starred', ideas })
             // Return idea update for unstarred idea
         } else {
             await Idea.findByIdAndUpdate(id, { starred: true }, { new: true }) 
-            ideas = await Idea.find({ creator_id }).sort({ updated_at: -1 })
+            ideas = await Idea.find({ creator_id, deleted_at: null }).sort({ updated_at: -1 })
             res.status(200).json({ message: 'Idea starred successfully', ideas })
         }
     } catch (err) {
