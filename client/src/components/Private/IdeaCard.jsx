@@ -17,7 +17,7 @@ const IdeaCard = ({
   return (
     <div className="grid gap-2">
       <Link
-        to={`${type == 'bin' ? `/bin/${id}`: `/ideas/${id}`}`}
+        to={`${type == "bin" ? `/bin/${id}` : `/ideas/${id}`}`}
         className="h-[150px] w-full cursor-pointer rounded-xl hover:bg-gray-300 bg-gray-200"
       ></Link>
       <div className="flex items-center justify-between ">
@@ -51,7 +51,18 @@ const IdeaCard = ({
               : category}
           </p>
         </div>
-        <p>{type == 'bin' ? getDateInEnglish(deletedDate) : getDateInEnglish(createDate)} </p>
+        <p>
+          {type === "bin"
+            ? isNaN(new Date(deletedDate))
+              ? "Invalid date"
+              : `${Math.max(
+                  0,
+                  Math.floor(
+                    (new Date(deletedDate) - new Date()) / (1000 * 60 * 60 * 24)
+                  )
+                )} days left`
+            : getDateInEnglish(createDate)}
+        </p>
       </div>
     </div>
   );
