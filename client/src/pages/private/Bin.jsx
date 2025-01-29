@@ -40,6 +40,7 @@ const Bin = () => {
       <div className="py-6">
         <div className="grid gap-4">
           <h2 className="text-4xl font-bold text-center">Your Bins</h2>
+          <p className="text-center text-sm">All ideas in bin will be automatically deleted after 30days!</p>
 
           {fetchLoading ? (
             <div className="grid p-2  min-h-[350px] bg-gray-50 w-full place-items-center rounded-2xl">
