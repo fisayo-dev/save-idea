@@ -16,8 +16,35 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useAsyncError, useNavigate } from "react-router-dom";
-import { use } from "react";
+import { useNavigate } from "react-router-dom";
+
+const ideaCategories = [
+  "Technology",
+  "Education",
+  "Health & Wellness",
+  "Finance",
+  "E-commerce",
+  "Sustainability",
+  "Social Impact",
+  "Entertainment",
+  "Gaming",
+  "AI & Machine Learning",
+  "Blockchain & Crypto",
+  "Mobile Apps",
+  "SaaS (Software as a Service)",
+  "Productivity",
+  "Marketing & Advertising",
+  "Design & Creativity",
+  "Real Estate",
+  "Food & Beverages",
+  "Travel & Tourism",
+  "Job & Career",
+  "Personal Development",
+  "Sports & Fitness",
+  "Parenting & Family",
+  "Fashion & Beauty",
+  "Security & Privacy",
+];
 
 const CreateIdea = () => {
   const { user } = useAuth();
@@ -187,15 +214,17 @@ const CreateIdea = () => {
                     <SelectValue placeholder="Pick a category"></SelectValue>
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem key={1} value="standard">
-                      <p>jdjdk</p>
-                    </SelectItem>
+                    {ideaCategories.map((category, index) => (
+                      <SelectItem key={index} value="standard">
+                        <p>{category}</p>
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               ) : (
                 <Input
                   type="text"
-                  placeholder="What category does your idea belong to?"
+                  placeholder="Enter a category"
                   onChange={(e) => setCategory(e.target.value)}
                   value={category}
                 />
