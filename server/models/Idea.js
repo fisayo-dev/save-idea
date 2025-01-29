@@ -9,6 +9,7 @@ const ideaSchema = new mongoose.Schema({
     creator_id: { type: mongoose.Schema.Types.ObjectId ,ref : 'User' },
     created_at: { type: 'Date', default: Date.now },
     updated_at: { type: 'Date', default: Date.now },
+    deleted_at: { type: 'Date', default: null },
     starred: { type: Boolean, default: false }
 })
 
