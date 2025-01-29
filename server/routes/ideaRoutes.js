@@ -11,6 +11,7 @@ router.post('/create_star/:id', authMiddleware, createStar);  // GET request to 
 router.get('/:id/creator/:creator_id', authMiddleware, getSingleIdea);  // GET request to fetch a single idea
 router.post('/', authMiddleware, createIdea);  // POST request to create a new idea
 router.put('/:id', authMiddleware, updateIdea);  // PUT request to update an idea
+router.put('/:id/creator/:creator_id') // Send idea to bin
 router.delete('/:id', authMiddleware, deleteIdea);  // DELETE request to delete an idea
 
 
