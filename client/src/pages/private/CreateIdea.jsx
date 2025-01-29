@@ -1,11 +1,23 @@
 import { Loader2Icon } from "lucide-react";
 import axiosInstance from "../../../axiosConfig";
-import { Button } from "../../components/ui/button";
-import { Input } from "../../components/ui/input";
-import { Textarea } from "../../components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
+import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { useAsyncError, useNavigate } from "react-router-dom";
+import { use } from "react";
 
 const CreateIdea = () => {
   const { user } = useAuth();
@@ -17,6 +29,8 @@ const CreateIdea = () => {
   const [category, setCategory] = useState("");
   const [inspirationSource, setInspirationSource] = useState("");
   const [problemToSolve, setProblemToSolve] = useState("");
+
+  const [categoryType, setCategoryType] = useState("select-from");
 
   // State for field errors
   const [errors, setErrors] = useState({
@@ -82,7 +96,7 @@ const CreateIdea = () => {
   const createNewIdea = async (e) => {
     e.preventDefault();
 
-    if (!validateFields()) {    
+    if (!validateFields()) {
       return;
     }
 
@@ -113,9 +127,9 @@ const CreateIdea = () => {
             What&apos;s on your mind today 🤔
           </h2>
           <form onSubmit={createNewIdea} className="grid gap-3">
-          {createError && (
-                <p className="bg-red-500 px-3 py-4 text-sm">{createError}</p>
-              )}
+            {createError && (
+              <p className="bg-red-500 px-3 py-4 text-sm">{createError}</p>
+            )}
             {/* Title Field */}
             <div className="grid gap-3">
               <label>Title</label>
@@ -148,12 +162,44 @@ const CreateIdea = () => {
             {/* Category Field */}
             <div className="grid gap-3">
               <label>Category</label>
-              <Input
-                type="text"
-                placeholder="What category does your idea belong to?"
-                onChange={(e) => setCategory(e.target.value)}
-                value={category}
-              />
+              <RadioGroup
+                className="flex gap-5"
+                value={categoryType}
+                onValueChange={(value) => setCategoryType(value)}
+                defaultValue="select-from"
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="select-from" id="option-one" />
+                  <Label htmlFor="option-one">Select from</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="others" id="option-two" />
+                  <Label htmlFor="option-two">Others</Label>
+                </div>
+              </RadioGroup>
+
+              {categoryType === "select-from" ? (
+                <Select
+                  value={category}
+                  onValueChange={(value) => setCategory(value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Pick a category"></SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem key={1} value="standard">
+                      <p>jdjdk</p>
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              ) : (
+                <Input
+                  type="text"
+                  placeholder="What category does your idea belong to?"
+                  onChange={(e) => setCategory(e.target.value)}
+                  value={category}
+                />
+              )}
               {errors.category && (
                 <p className="text-red-500 text-sm">{errors.category}</p>
               )}
@@ -170,7 +216,9 @@ const CreateIdea = () => {
                 value={inspirationSource}
               />
               {errors.inspirationSource && (
-                <p className="text-red-500 text-sm">{errors.inspirationSource}</p>
+                <p className="text-red-500 text-sm">
+                  {errors.inspirationSource}
+                </p>
               )}
             </div>
 
