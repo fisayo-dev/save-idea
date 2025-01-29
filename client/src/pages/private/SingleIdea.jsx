@@ -3,48 +3,48 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../../../axiosConfig";
 import { useAuth } from "../../contexts/AuthContext";
 import { Button } from "../../components/ui/button";
-import { Back, Trash } from "iconsax-react";
+import { Back, Refresh, Trash } from "iconsax-react";
 import { Loader2Icon, Pencil, XCircle } from "lucide-react";
 
 const SingleIdea = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
   const [idea, setIdea] = useState(null);
   const [error, setError] = useState(null);
-  const { user } = useAuth();
+  const [editIdeaMode, setEditIdeaMode] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [editLoading, setEditLoading] = useState(false);
-  const [editIdeaMode, setEditIdeaMode] = useState(false);
-  const navigate = useNavigate();
 
-  // State for editable fields
+  // Editable fields
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [inspirationSource, setInspirationSource] = useState("");
   const [problemToSolve, setProblemToSolve] = useState("");
 
-  // Fetch the idea
+  /** Fetch the idea */
   const getIdea = async () => {
     try {
       const response = await axiosInstance.get(`/ideas/${id}/creator/${user}`);
-      const data = response.data;
-      setIdea(data.idea);
+      const data = response.data.idea;
 
-      // Initialize editable fields with the fetched idea data
-      setTitle(data.idea.title);
-      setDescription(data.idea.description);
-      setCategory(data.idea.category);
-      setInspirationSource(data.idea.inspiration_source);
-      setProblemToSolve(data.idea.problem_to_solve);
+      setIdea(data);
+      setTitle(data.title);
+      setDescription(data.description);
+      setCategory(data.category);
+      setInspirationSource(data.inspiration_source);
+      setProblemToSolve(data.problem_to_solve);
 
       setError(null);
     } catch (err) {
       setIdea(null);
-      setError(err.message || "An unknown error occurred");
+      setError(err.message || "An error occurred while fetching the idea.");
     }
   };
 
-  // Edit the idea
+  /** Edit the idea */
   const editIdea = async (e) => {
     e.preventDefault();
     setEditLoading(true);
@@ -58,46 +58,42 @@ const SingleIdea = () => {
         problem_to_solve: problemToSolve,
         creator_id: user,
       });
-
-      // Redirect to the single idea page after successful edit
       setEditIdeaMode(false);
+      getIdea(); // Refresh data after update
     } catch (err) {
-      setError(err.message || "An unknown error occurred");
+      setError(err.message || "An error occurred while updating the idea.");
     } finally {
       setEditLoading(false);
     }
   };
 
-  // Delete the idea
+  /** Move the idea to bin */
+  const deleteToBin = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axiosInstance.put(`/ideas/${id}/bin`, { creator_id: user });
+      navigate("/bin");
+    } catch (err) {
+      setError(err.message || "Failed to move idea to bin.");
+    }
+  };
+
+  /** Permanently delete the idea */
   const deleteIdea = async (e) => {
     e.preventDefault();
     setDeleteLoading(true);
 
     try {
-      await axiosInstance.delete(`/ideas/${id}`, {
-        data: { creator_id: user },
-      });
-      setError(null);
-      setIdea(null);
+      await axiosInstance.delete(`/ideas/${id}`, { data: { creator_id: user } });
       navigate("/ideas");
     } catch (err) {
-      setError(err.message || "An unknown error occurred");
+      setError(err.message || "Failed to delete the idea.");
     } finally {
       setDeleteLoading(false);
     }
   };
 
-  const deleteToBin = async (e) => {
-    e.preventDefault()
-    try {
-      await axiosInstance.put(`/ideas/${id}/creator/${user}`)
-      navigate('/bin')
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  // Fetch the idea when the component mounts
   useEffect(() => {
     getIdea();
   }, [id]);
@@ -109,6 +105,7 @@ const SingleIdea = () => {
         {!error && !idea && <div className="text-blue-500">Loading...</div>}
         {!error && idea && (
           <div className="grid gap-4">
+            {/* Navigation and Controls */}
             <div className="flex items-center justify-between">
               <Link to="/ideas">
                 <Button className="flex items-center gap-2">
@@ -116,133 +113,81 @@ const SingleIdea = () => {
                   <p>Back</p>
                 </Button>
               </Link>
-              {deleteLoading && (
-                <div className="bg-gray-200 rounded-full px-4 py-2 cursor-not-allowed opacity-70">
-                  Deleting idea...
-                </div>
-              )}
-              <div className="flex items-center justify-between gap-2">
-                {editIdeaMode ? (
-                  <div
-                    className="bg-gray-200 cursor-pointer hover:bg-gray-300 rounded-full p-3"
-                    onClick={() => setEditIdeaMode(false)}
-                  >
-                    <XCircle />
-                  </div>
+
+              {/* Edit/Delete Controls */}
+              <div className="flex items-center gap-2">
+                {idea.deleted_at === null ? (
+                  <>
+                    {/* Toggle Edit Mode */}
+                    {editIdeaMode ? (
+                      <button
+                        className="bg-gray-200 cursor-pointer hover:bg-gray-300 rounded-full p-3"
+                        onClick={() => setEditIdeaMode(false)}
+                      >
+                        <XCircle />
+                      </button>
+                    ) : (
+                      <button
+                        className="bg-gray-200 cursor-pointer hover:bg-gray-300 rounded-full p-3"
+                        onClick={() => setEditIdeaMode(true)}
+                      >
+                        <Pencil />
+                      </button>
+                    )}
+
+                    {/* Move to Bin */}
+                    <button
+                      className="bg-gray-200 cursor-pointer hover:bg-gray-300 rounded-full p-3"
+                      onClick={deleteToBin}
+                    >
+                      <Trash />
+                    </button>
+                  </>
                 ) : (
-                  <div
-                    className="bg-gray-200 cursor-pointer hover:bg-gray-300 rounded-full p-3"
-                    onClick={() => setEditIdeaMode(true)}
-                  >
-                    <Pencil />
-                  </div>
+                  <>
+                    {/* Restore & Delete Permanently */}
+                    <Button className="flex items-center gap-2" onClick={deleteIdea} disabled={deleteLoading}>
+                      {deleteLoading ? "Deleting..." : "Delete Permanently"}
+                    </Button>
+                    <Button className="flex items-center gap-2">
+                      <Refresh className="h-8 w-8" />
+                      <p>Restore</p>
+                    </Button>
+                  </>
                 )}
-                <div
-                  className="bg-gray-200 cursor-pointer hover:bg-gray-300 rounded-full p-3"
-                  onClick={deleteToBin}
-                >
-                  <Trash />
-                </div>
               </div>
             </div>
+
+            {/* Idea Details */}
             <div className="grid gap-6 p-2">
-              {/* Title */}
-              <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
-                <label className="text-sm">Title</label>
-                {editIdeaMode ? (
-                  <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className="px-4 py-2 border-[.101rem] border-gray-600 rounded-2xl"
-                  />
-                ) : (
-                  <h2 className="text-3xl font-bold">{title}</h2>
-                )}
-              </div>
-
-              {/* Description */}
-              <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
-                <label className="text-sm">Description</label>
-                {editIdeaMode ? (
-                  <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="px-4 py-2 border-[.101rem] border-gray-600 rounded-2xl"
-                  />
-                ) : (
-                  <p>{description}</p>
-                )}
-              </div>
-
-              {/* Category */}
-              <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
-                <label className="text-sm">Category</label>
-                {editIdeaMode ? (
-                  <input
-                    type="text"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="px-4 py-2 border-[.101rem] border-gray-600 rounded-2xl"
-                  />
-                ) : (
-                  <p>{category}</p>
-                )}
-              </div>
-
-              {/* Problem to Solve */}
-              <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
-                <label className="text-sm">Problem to solve</label>
-                {editIdeaMode ? (
-                  <textarea
-                    value={problemToSolve}
-                    onChange={(e) => setProblemToSolve(e.target.value)}
-                    className="min-h-[350px] px-4 py-2 border-[.101rem] border-gray-600 rounded-2xl"
-                  />
-                ) : (
-                  <textarea
-                    readOnly
-                    className="min-h-[350px] px-4 py-2 rounded-2xl"
-                  >
-                    {problemToSolve}
-                  </textarea>
-                )}
-              </div>
-
-              {/* Inspiration Source */}
-              <div className="grid gap-2 p-4 rounded-xl bg-gray-200">
-                <label className="text-sm">Inspirational source</label>
-                {editIdeaMode ? (
-                  <textarea
-                    value={inspirationSource}
-                    onChange={(e) => setInspirationSource(e.target.value)}
-                    className="min-h-[350px] px-4 py-2 border-[.101rem] border-gray-600 rounded-2xl"
-                  />
-                ) : (
-                  <textarea
-                    readOnly
-                    className="min-h-[350px] px-4 py-2 rounded-2xl"
-                  >
-                    {inspirationSource}
-                  </textarea>
-                )}
-              </div>
+              {[
+                { label: "Title", value: title, setter: setTitle },
+                { label: "Description", value: description, setter: setDescription },
+                { label: "Category", value: category, setter: setCategory },
+                { label: "Problem to solve", value: problemToSolve, setter: setProblemToSolve },
+                { label: "Inspirational source", value: inspirationSource, setter: setInspirationSource },
+              ].map(({ label, value, setter }) => (
+                <div key={label} className="grid gap-2 p-4 rounded-xl bg-gray-200">
+                  <label className="text-sm">{label}</label>
+                  {editIdeaMode ? (
+                    <textarea
+                      value={value}
+                      onChange={(e) => setter(e.target.value)}
+                      className="min-h-[100px] px-4 py-2 border border-gray-600 rounded-2xl"
+                    />
+                  ) : (
+                    <p className="px-4 py-2">{value}</p>
+                  )}
+                </div>
+              ))}
             </div>
 
             {/* Save Changes Button */}
             {editIdeaMode && (
               <div className="mx-auto">
-                <Button
-                  onClick={editIdea}
-                  disabled={editLoading}
-                  className="flex items-center gap-2"
-                >
-                  {editLoading ? (
-                    <Loader2Icon className="animate-spin" />
-                  ) : (
-                    <Pencil />
-                  )}
-                  <p>{editLoading ? "Saving changes" : "Save changes"}</p>
+                <Button onClick={editIdea} disabled={editLoading} className="flex items-center gap-2">
+                  {editLoading ? <Loader2Icon className="animate-spin" /> : <Pencil />}
+                  <p>{editLoading ? "Saving changes..." : "Save changes"}</p>
                 </Button>
               </div>
             )}
