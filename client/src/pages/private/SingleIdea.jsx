@@ -73,7 +73,7 @@ const SingleIdea = () => {
 
     try {
       await axiosInstance.put(`/ideas/${id}/bin`, { creator_id: user });
-      navigate("/bin");
+      navigate("/ideas");
     } catch (err) {
       setError(err.message || "Failed to move idea to bin.");
     }
@@ -107,7 +107,7 @@ const SingleIdea = () => {
           <div className="grid gap-4">
             {/* Navigation and Controls */}
             <div className="flex items-center justify-between">
-              <Link to="/ideas">
+              <Link to={"/ideas"}>
                 <Button className="flex items-center gap-2">
                   <Back className="h-8 w-8" />
                   <p>Back</p>

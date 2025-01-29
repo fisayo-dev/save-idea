@@ -17,7 +17,7 @@ const IdeaCard = ({
   return (
     <div className="grid gap-2">
       <Link
-        to={`/ideas/${id}`}
+        to={`${type == 'bin' ? `/bin/${id}`: `/ideas/${id}`}`}
         className="h-[150px] w-full cursor-pointer rounded-xl hover:bg-gray-300 bg-gray-200"
       ></Link>
       <div className="flex items-center justify-between ">
