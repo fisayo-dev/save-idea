@@ -23,6 +23,7 @@ const SingleIdea = () => {
   const [category, setCategory] = useState("");
   const [inspirationSource, setInspirationSource] = useState("");
   const [problemToSolve, setProblemToSolve] = useState("");
+  const [deleteDate, setDeleteDate] = useState(null);
 
   /** Fetch the idea */
   const getIdea = async () => {
@@ -31,6 +32,7 @@ const SingleIdea = () => {
       const data = response.data.idea;
 
       setIdea(data);
+      setDeleteDate(data.deleted_at);
       setTitle(data.title);
       setDescription(data.description);
       setCategory(data.category);
@@ -85,7 +87,9 @@ const SingleIdea = () => {
     setDeleteLoading(true);
 
     try {
-      await axiosInstance.delete(`/ideas/${id}`, { data: { creator_id: user } });
+      await axiosInstance.delete(`/ideas/${id}`, {
+        data: { creator_id: user },
+      });
       navigate("/ideas");
     } catch (err) {
       setError(err.message || "Failed to delete the idea.");
@@ -107,7 +111,7 @@ const SingleIdea = () => {
           <div className="grid gap-4">
             {/* Navigation and Controls */}
             <div className="flex items-center justify-between">
-              <Link to={"/ideas"}>
+              <Link to={`${deleteDate == null ? "/ideas" : "/bin"}`}>
                 <Button className="flex items-center gap-2">
                   <Back className="h-8 w-8" />
                   <p>Back</p>
@@ -146,7 +150,11 @@ const SingleIdea = () => {
                 ) : (
                   <>
                     {/* Restore & Delete Permanently */}
-                    <Button className="flex items-center gap-2" onClick={deleteIdea} disabled={deleteLoading}>
+                    <Button
+                      className="flex items-center gap-2"
+                      onClick={deleteIdea}
+                      disabled={deleteLoading}
+                    >
                       {deleteLoading ? "Deleting..." : "Delete Permanently"}
                     </Button>
                     <Button className="flex items-center gap-2">
@@ -162,12 +170,27 @@ const SingleIdea = () => {
             <div className="grid gap-6 p-2">
               {[
                 { label: "Title", value: title, setter: setTitle },
-                { label: "Description", value: description, setter: setDescription },
+                {
+                  label: "Description",
+                  value: description,
+                  setter: setDescription,
+                },
                 { label: "Category", value: category, setter: setCategory },
-                { label: "Problem to solve", value: problemToSolve, setter: setProblemToSolve },
-                { label: "Inspirational source", value: inspirationSource, setter: setInspirationSource },
+                {
+                  label: "Problem to solve",
+                  value: problemToSolve,
+                  setter: setProblemToSolve,
+                },
+                {
+                  label: "Inspirational source",
+                  value: inspirationSource,
+                  setter: setInspirationSource,
+                },
               ].map(({ label, value, setter }) => (
-                <div key={label} className="grid gap-2 p-4 rounded-xl bg-gray-200">
+                <div
+                  key={label}
+                  className="grid gap-2 p-4 rounded-xl bg-gray-200"
+                >
                   <label className="text-sm">{label}</label>
                   {editIdeaMode ? (
                     <textarea
@@ -185,8 +208,16 @@ const SingleIdea = () => {
             {/* Save Changes Button */}
             {editIdeaMode && (
               <div className="mx-auto">
-                <Button onClick={editIdea} disabled={editLoading} className="flex items-center gap-2">
-                  {editLoading ? <Loader2Icon className="animate-spin" /> : <Pencil />}
+                <Button
+                  onClick={editIdea}
+                  disabled={editLoading}
+                  className="flex items-center gap-2"
+                >
+                  {editLoading ? (
+                    <Loader2Icon className="animate-spin" />
+                  ) : (
+                    <Pencil />
+                  )}
                   <p>{editLoading ? "Saving changes..." : "Save changes"}</p>
                 </Button>
               </div>
